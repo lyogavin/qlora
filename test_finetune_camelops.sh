@@ -29,7 +29,7 @@ mkdir -p $OUTPUT_PATH
 #target len @qt0.98: 670.2800000000279
 
 
-python qlora.py --dataset="Chinese-Vicuna/guanaco_belle_merge_v1.0" \
+python qlora.py --dataset="chinese-vicuna" \
     --dataset_format="alpaca-clean" `#alpaca-clean has similar format to chinese training dataset` \
     --learning_rate 0.0001 `# QLoRA paper appendix B Table 9 `\
     --per_device_train_batch_size 1 `# fix for fitting mem `\
