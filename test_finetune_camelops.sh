@@ -40,6 +40,8 @@ python qlora.py --dataset="chinese-vicuna" \
     --target_max_len 512 `# follow QLoRA paper appendix B Table 9 `\
     --eval_dataset_size 10 `# mainly for testing, no need to big` \
     --do_eval \
+    --evaluation_strategy "steps" \
+    --eval_steps 10 \
     --output_dir $OUTPUT_PATH \
     --report_to 'wandb' \
     --sample_generate `# test sample generation every once a while`  \
