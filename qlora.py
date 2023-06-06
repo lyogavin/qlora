@@ -234,10 +234,11 @@ def find_all_linear_names(args, model):
 class SampleGenerateCallback(transformers.TrainerCallback):
     "A callback that prints a sample generations of the model in the process of training"
 
-    def on_evaluate(self, args, state, control, **kwargs):
+    def on_log(self, args, state, control, **kwargs):
         sample_inputs = [
             '用一句话描述地球为什么是独一无二的。',
-            '中国是否应该推出刺激政策救楼市？'
+            '中国是否应该推出刺激政策救楼市？',
+            '如何更好地融入新工作圈子'
         ]
         if "model" in kwargs:
             for sample_input in sample_inputs:

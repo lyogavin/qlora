@@ -40,5 +40,6 @@ python qlora.py --dataset="chinese-vicuna" \
     --target_max_len 512 `# follow QLoRA paper appendix B Table 9 `\
     --output_dir $OUTPUT_PATH \
     --report_to 'wandb' \
-    --sample_generate \
+    --sample_generate `# test sample generation every once a while`  \
+    --save_steps 20 `# debug mode only` \
     --debug_mode
