@@ -44,6 +44,19 @@ from transformers.trainer_utils import PREFIX_CHECKPOINT_DIR
 torch.backends.cuda.matmul.allow_tf32 = True
 
 
+logging_file_path = f"./qlora_logs.log"
+
+handlers = [
+    logging.FileHandler(logging_file_path),
+    logging.StreamHandler(sys.stdout)
+]
+
+logging.basicConfig(
+    level=logging.INFO,
+    format="%(asctime)s [%(levelname)s] %(message)s",
+    handlers=handlers
+)
+
 logger = logging.getLogger(__name__)
 
 IGNORE_INDEX = -100
@@ -235,6 +248,7 @@ class SampleGenerateCallback(transformers.TrainerCallback):
     "A callback that prints a sample generations of the model in the process of training"
 
     def on_evaluate(self, args, state, control, **kwargs):
+        logger.info("on_evaluate in SampleGenerateCallback...")
         sample_inputs = [
             '用一句话描述地球为什么是独一无二的。',
             '中国是否应该推出刺激政策救楼市？',
@@ -243,7 +257,6 @@ class SampleGenerateCallback(transformers.TrainerCallback):
         if "model" in kwargs:
             for sample_input in sample_inputs:
                 tokenizer = kwargs['tokenizer']
-                logger.info("on_evaluate in SampleGenerateCallback...")
                 inputs = "Below is an instruction that describes a task. " \
                          "Write a response that appropriately completes the request.\n\n" \
                          "### Instruction:\n{sample_input}\n\n### Response: ".format(sample_input=sample_input)
