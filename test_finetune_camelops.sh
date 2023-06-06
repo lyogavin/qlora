@@ -39,4 +39,6 @@ python qlora.py --dataset="Chinese-Vicuna/guanaco_belle_merge_v1.0" \
     --source_max_len 512  `# default setting in code, cn model 2048 too long  `\
     --target_max_len 512 `# follow QLoRA paper appendix B Table 9 `\
     --output_dir $OUTPUT_PATH \
-    --report_to 'wandb'
+    --report_to 'wandb' \
+    --sample_generate \
+    --debug_mode
