@@ -596,7 +596,7 @@ def make_data_module(tokenizer: transformers.PreTrainedTokenizer, args) -> Dict:
     dataset = load_data(args.dataset)
     if args.debug_mode:
         dataset['train'] = dataset['train'].filter(lambda x,i: i < 200, with_indices=True)
-        dataset['eval'] = dataset['eval'].filter(lambda x,i: i < 200, with_indices=True)
+        #dataset['eval'] = dataset['eval'].filter(lambda x,i: i < 200, with_indices=True)
     dataset = format_dataset(dataset, args.dataset_format)
 
     # Split train/eval, reduce size
