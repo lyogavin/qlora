@@ -235,22 +235,27 @@ class SampleGenerateCallback(transformers.TrainerCallback):
     "A callback that prints a sample generations of the model in the process of training"
 
     def on_evaluate(self, args, state, control, **kwargs):
+        sample_inputs = [
+            '用一句话描述地球为什么是独一无二的。',
+            '中国是否应该推出刺激政策救楼市？'
+        ]
         if "model" in kwargs:
-            tokenizer = kwargs['tokenizer']
-            logger.info("on_evaluate in SampleGenerateCallback...")
-            inputs = "Below is an instruction that describes a task. " \
-                     "Write a response that appropriately completes the request.\n\n" \
-                     "### Instruction:\n用一句话描述地球为什么是独一无二的。\n\n### Response: "
-            logger.info(f"sample input: {inputs}")
-            model = kwargs['model']
-            input_ids = tokenizer(inputs, return_tensors="pt")['input_ids']
-            input_ids = input_ids.to('cuda')
-            generation_output = model.generate(
-                input_ids=input_ids,
-                max_new_tokens=35,
-            )
-            #print(generation_output)
-            logger.info(f"sample output: {tokenizer.decode(generation_output[0])}")
+            for sample_input in sample_inputs:
+                tokenizer = kwargs['tokenizer']
+                logger.info("on_evaluate in SampleGenerateCallback...")
+                inputs = "Below is an instruction that describes a task. " \
+                         "Write a response that appropriately completes the request.\n\n" \
+                         "### Instruction:\n{sample_input}\n\n### Response: ".format(sample_input=sample_input)
+                logger.info(f"sample input: {inputs}")
+                model = kwargs['model']
+                input_ids = tokenizer(inputs, return_tensors="pt")['input_ids']
+                input_ids = input_ids.to('cuda')
+                generation_output = model.generate(
+                    input_ids=input_ids,
+                    max_new_tokens=35,
+                )
+                #print(generation_output)
+                logger.info(f"sample output: {tokenizer.decode(generation_output[0])}")
 
         else:
             logger.info(f"model not found in kwargs, skipping")
