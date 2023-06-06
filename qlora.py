@@ -245,6 +245,7 @@ class SampleGenerateCallback(transformers.TrainerCallback):
                 logger.info("on_evaluate in SampleGenerateCallback...")
                 inputs = "Below is an instruction that describes a task. " \
                          "Write a response that appropriately completes the request.\n\n" \
+                         "### Instruction:\n{sample_input}\n\n### Response: ".format(sample_input=sample_input)
                 logger.info(f"sample input: {inputs}")
                 model = kwargs['model']
                 input_ids = tokenizer(inputs, return_tensors="pt")['input_ids']
