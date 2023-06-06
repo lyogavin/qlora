@@ -41,9 +41,10 @@ python qlora.py --dataset="chinese-vicuna" \
     --eval_dataset_size 1 `# mainly for testing, no need to be big` \
     --do_eval \
     --evaluation_strategy "steps" \
-    --eval_steps 10 `# 10 for debug mode only, 200 for training`  \
+    --eval_steps 200 `# 10 for debug mode only, 200 for training`  \
     --output_dir $OUTPUT_PATH \
     --report_to 'wandb' \
     --sample_generate `# test sample generation every once a while`  \
-    --save_steps 20 `# 20 for debug mode only, 200 for training` \
-    --debug_mode
+    --save_steps 200 `# 20 for debug mode only, 200 for training`
+    
+#    --debug_mode `# only set when it's debug mode` \
