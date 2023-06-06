@@ -43,6 +43,7 @@ from transformers.trainer_utils import PREFIX_CHECKPOINT_DIR
 
 torch.backends.cuda.matmul.allow_tf32 = True
 
+
 logger = logging.getLogger(__name__)
 
 IGNORE_INDEX = -100
@@ -181,6 +182,8 @@ class TrainingArguments(transformers.Seq2SeqTrainingArguments):
     save_strategy: str = field(default='steps', metadata={"help": 'When to save checkpoints'})
     save_steps: int = field(default=250, metadata={"help": 'How often to save a model'})
     save_total_limit: int = field(default=40, metadata={"help": 'How many checkpoints to save before the oldest is overwritten'})
+    sample_generate: bool = field(default=False, metadata={"help": 'If do sample generation on evaluation.'})
+    debug_mode: bool = field(default=False, metadata={"help": 'debug mode sample 200 train/eval samples for validation'})
 
 @dataclass
 class GenerationArguments:
@@ -228,9 +231,35 @@ def find_all_linear_names(args, model):
     return list(lora_module_names)
 
 
+class SampleGenerateCallback(transformers.TrainerCallback):
+    "A callback that prints a sample generations of the model in the process of training"
+
+    def on_evaluate(self, args, state, control, **kwargs):
+        if "model" in kwargs:
+            tokenizer = kwargs['tokenizer']
+            logger.info("on_evaluate in SampleGenerateCallback...")
+            inputs = "Below is an instruction that describes a task. " \
+                     "Write a response that appropriately completes the request.\n\n" \
+                     "### Instruction:\n用一句话描述地球为什么是独一无二的。\n\n### Response: "
+            logger.info(f"sample input: {inputs}")
+            model = kwargs['model']
+            input_ids = tokenizer(inputs, return_tensors="pt")['input_ids']
+            input_ids = input_ids.to('cuda')
+            generation_output = model.generate(
+                input_ids=input_ids,
+                max_new_tokens=35,
+            )
+            #print(generation_output)
+            logger.info(f"sample output: {tokenizer.decode(generation_output[0])}")
+
+        else:
+            logger.info(f"model not found in kwargs, skipping")
+
+
+
 class SavePeftModelCallback(transformers.TrainerCallback):
     def save_model(self, args, state, kwargs):
-        print('Saving PEFT checkpoint...')
+        logger.info('Saving PEFT checkpoint...')
         if state.best_model_checkpoint is not None:
             checkpoint_folder = os.path.join(state.best_model_checkpoint, "adapter_model")
         else:
@@ -263,7 +292,7 @@ def get_accelerate_model(args, checkpoint_dir):
 
     if args.full_finetune: assert args.bits in [16, 32]
 
-    print(f'loading base model {args.model_name_or_path}...')
+    logger.info(f'loading base model {args.model_name_or_path}...')
     compute_dtype = (torch.float16 if args.fp16 else (torch.bfloat16 if args.bf16 else torch.float32))
     model = AutoModelForCausalLM.from_pretrained(
         args.model_name_or_path,
@@ -287,9 +316,9 @@ def get_accelerate_model(args, checkpoint_dir):
     if compute_dtype == torch.float16 and args.bits == 4:
         major, minor = torch.cuda.get_device_capability()
         if major >= 8:
-            print('='*80)
-            print('Your GPU supports bfloat16, you can accelerate training with the argument --bf16')
-            print('='*80)
+            logger.info('='*80)
+            logger.info('Your GPU supports bfloat16, you can accelerate training with the argument --bf16')
+            logger.info('='*80)
 
     setattr(model, 'model_parallel', True)
     setattr(model, 'is_parallelizable', True)
@@ -303,10 +332,10 @@ def get_accelerate_model(args, checkpoint_dir):
 
     if not args.full_finetune:
         if checkpoint_dir is not None:
-            print("Loading adapters from checkpoint.")
+            logger.info("Loading adapters from checkpoint.")
             model = PeftModel.from_pretrained(model, join(checkpoint_dir, 'adapter_model'), is_trainable=True)
         else:
-            print(f'adding LoRA modules...')
+            logger.info(f'adding LoRA modules...')
             modules = find_all_linear_names(args, model)
             config = LoraConfig(
                 r=args.lora_r,
@@ -341,7 +370,7 @@ def print_trainable_parameters(args, model):
         if param.requires_grad:
             trainable_params += param.numel()
     if args.bits == 4: trainable_params /= 2
-    print(
+    logger.info(
         f"trainable params: {trainable_params} || "
         f"all params: {all_param} || "
         f"trainable: {100 * trainable_params / all_param}"
@@ -515,6 +544,8 @@ def make_data_module(tokenizer: transformers.PreTrainedTokenizer, args) -> Dict:
             return load_dataset("timdettmers/openassistant-guanaco")
         elif dataset_name == 'vicuna':
             raise NotImplementedError("Vicuna data was not released.")
+        elif dataset_name == 'chinese-vicuna':
+            return load_dataset("Chinese-Vicuna/guanaco_belle_merge_v1.0")
         else:
             if os.path.exists(dataset_name):
                 try:
@@ -558,6 +589,9 @@ def make_data_module(tokenizer: transformers.PreTrainedTokenizer, args) -> Dict:
         
      # Load dataset.
     dataset = load_data(args.dataset)
+    if args.debug_mode:
+        dataset['train'] = dataset.filter(lambda x,i: i < 200, with_indices=True)
+        dataset['eval'] = dataset.filter(lambda x,i: i < 200, with_indices=True)
     dataset = format_dataset(dataset, args.dataset_format)
 
     # Split train/eval, reduce size
@@ -565,7 +599,7 @@ def make_data_module(tokenizer: transformers.PreTrainedTokenizer, args) -> Dict:
         if 'eval' in dataset:
             eval_dataset = dataset['eval']
         else:
-            print('Splitting train dataset in train and validation according to `eval_dataset_size`')
+            logger.info('Splitting train dataset in train and validation according to `eval_dataset_size`')
             dataset = dataset["train"].train_test_split(
                 test_size=args.eval_dataset_size, shuffle=True, seed=42
             )
@@ -605,7 +639,7 @@ def get_last_checkpoint(checkpoint_dir):
                 max_step = max(max_step, int(filename.replace('checkpoint-', '')))
         if max_step == 0: return None, is_completed # training started, but no checkpoint
         checkpoint_dir = join(checkpoint_dir, f'checkpoint-{max_step}')
-        print(f"Found a previous checkpoint at: {checkpoint_dir}")
+        logger.info(f"Found a previous checkpoint at: {checkpoint_dir}")
         return checkpoint_dir, is_completed # checkpoint found!
     return None, False # first training
 
@@ -620,15 +654,17 @@ def train():
         **vars(model_args), **vars(data_args), **vars(training_args)
     )
 
+    logger.info(f"args: {args}")
+
     checkpoint_dir, completed_training = get_last_checkpoint(args.output_dir)
     if completed_training:
-        print('Detected that training was already completed!')
+        logger.info('Detected that training was already completed!')
 
     model = get_accelerate_model(args, checkpoint_dir)
 
     model.config.use_cache = False
     print_trainable_parameters(args, model)
-    print('loaded model')
+    logger.info('loaded model')
     set_seed(args.seed)
 
     # Tokenizer
@@ -650,7 +686,7 @@ def train():
         # Check and add them if missing to prevent them from being parsed into different tokens.
         # Note that these are present in the vocabulary. 
         # Note also that `model.config.pad_token_id` is 0 which corresponds to `<unk>` token.
-        print('Adding special tokens.')
+        logger.info('Adding special tokens.')
         tokenizer.add_special_tokens({
                 "eos_token": tokenizer.convert_ids_to_tokens(model.config.eos_token_id),
                 "bos_token": tokenizer.convert_ids_to_tokens(model.config.bos_token_id),
@@ -669,6 +705,8 @@ def train():
     # Callbacks
     if not args.full_finetune:
         trainer.add_callback(SavePeftModelCallback)
+    if args.sample_generate:
+        trainer.add_callback(SampleGenerateCallback)
     if args.do_mmlu_eval:
         if args.mmlu_dataset == 'mmlu-zs':
             mmlu_dataset = load_dataset("json", data_files={
@@ -741,7 +779,7 @@ def train():
     total = 0
     for k, v in dtypes.items(): total+= v
     for k, v in dtypes.items():
-        print(k, v, v/total)
+        logger.info(k, v, v/total)
 
     all_metrics = {"run_name": args.run_name}
     # Training
@@ -777,7 +815,7 @@ def train():
                 example['prediction_with_input'] = predictions[i].strip()
                 example['prediction'] = predictions[i].replace(example['input'], '').strip()
                 fout.write(json.dumps(example) + '\n')
-        print(prediction_metrics)
+        logger.info(prediction_metrics)
         trainer.log_metrics("predict", prediction_metrics)
         trainer.save_metrics("predict", prediction_metrics)
         all_metrics.update(prediction_metrics)
