@@ -266,7 +266,7 @@ class SampleGenerateCallback(transformers.TrainerCallback):
                 input_ids = input_ids.to('cuda')
                 generation_output = model.generate(
                     input_ids=input_ids,
-                    max_new_tokens=35,
+                    max_new_tokens=70,
                 )
                 #print(generation_output)
                 logger.info(f"sample output: {tokenizer.decode(generation_output[0])}")

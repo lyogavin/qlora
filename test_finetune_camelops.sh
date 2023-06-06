@@ -38,12 +38,12 @@ python qlora.py --dataset="chinese-vicuna" \
     --model_name_or_path "timdettmers/guanaco-33b-merged" \
     --source_max_len 512  `# default setting in code, cn model 2048 too long  `\
     --target_max_len 512 `# follow QLoRA paper appendix B Table 9 `\
-    --eval_dataset_size 10 `# mainly for testing, no need to big` \
+    --eval_dataset_size 1 `# mainly for testing, no need to be big` \
     --do_eval \
     --evaluation_strategy "steps" \
-    --eval_steps 10 \
+    --eval_steps 10 `# 10 for debug mode only, 200 for training`  \
     --output_dir $OUTPUT_PATH \
     --report_to 'wandb' \
     --sample_generate `# test sample generation every once a while`  \
-    --save_steps 20 `# debug mode only` \
+    --save_steps 20 `# 20 for debug mode only, 200 for training` \
     --debug_mode
