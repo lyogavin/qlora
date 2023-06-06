@@ -245,7 +245,6 @@ class SampleGenerateCallback(transformers.TrainerCallback):
                 logger.info("on_evaluate in SampleGenerateCallback...")
                 inputs = "Below is an instruction that describes a task. " \
                          "Write a response that appropriately completes the request.\n\n" \
-                         "### Instruction:\n{sample_input}\n\n### Response: ".format(sample_input=sample_input)
                 logger.info(f"sample input: {inputs}")
                 model = kwargs['model']
                 input_ids = tokenizer(inputs, return_tensors="pt")['input_ids']
@@ -595,8 +594,8 @@ def make_data_module(tokenizer: transformers.PreTrainedTokenizer, args) -> Dict:
      # Load dataset.
     dataset = load_data(args.dataset)
     if args.debug_mode:
-        dataset['train'] = dataset.filter(lambda x,i: i < 200, with_indices=True)
-        dataset['eval'] = dataset.filter(lambda x,i: i < 200, with_indices=True)
+        dataset['train'] = dataset['train'].filter(lambda x,i: i < 200, with_indices=True)
+        dataset['eval'] = dataset['eval'].filter(lambda x,i: i < 200, with_indices=True)
     dataset = format_dataset(dataset, args.dataset_format)
 
     # Split train/eval, reduce size
