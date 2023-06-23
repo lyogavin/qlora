@@ -31,7 +31,7 @@ mkdir -p $OUTPUT_PATH
 
 
 
-python qlora.py --dataset="/home/ubuntu/cloudfs/ghost_data/metacritics/metacritics_fact_encoder_training_data.json" \
+python qlora.py --dataset="./metacritics_fact_encoder_training_data.json" \
     --dataset_format="fact_encoder" `#alpaca-clean has similar format to chinese training dataset` \
     --learning_rate 0.0001 `# QLoRA paper appendix B Table 9 `\
     --per_device_train_batch_size 1 `# fix for fitting mem `\
