@@ -29,22 +29,24 @@ mkdir -p $OUTPUT_PATH
 #target len @qt0.98: 670.2800000000279
 
 
-python qlora.py --dataset="chinese-vicuna" \
-    --dataset_format="alpaca-clean" `#alpaca-clean has similar format to chinese training dataset` \
+
+
+python qlora.py --dataset="/home/ubuntu/cloudfs/ghost_data/metacritics/metacritics_fact_encoder_training_data.json" \
+    --dataset_format="fact_encoder" `#alpaca-clean has similar format to chinese training dataset` \
     --learning_rate 0.0001 `# QLoRA paper appendix B Table 9 `\
     --per_device_train_batch_size 1 `# fix for fitting mem `\
     --gradient_accumulation_steps 16 `# QLoRA paper appendix B Table 9  `\
-    --max_steps 10000 `# QLoRA paper appendix B Table 9, follow paper setting even though cn data is 690k much bigger than OASST1 9k, batch size considering accum`\
+    --max_steps 45*5 `# QLoRA paper appendix B Table 9, follow paper setting even though cn data is 690k much bigger than OASST1 9k, batch size considering accum`\
     --model_name_or_path "timdettmers/guanaco-33b-merged" \
-    --source_max_len 512  `# default setting in code, cn model 2048 too long  `\
-    --target_max_len 512 `# follow QLoRA paper appendix B Table 9 `\
+    --source_max_len 42  `# default setting in code, cn model 2048 too long  `\
+    --target_max_len 2829 `# follow QLoRA paper appendix B Table 9 `\
     --eval_dataset_size 1 `# mainly for testing, no need to be big` \
     --do_eval \
     --evaluation_strategy "steps" \
-    --eval_steps 200 `# 10 for debug mode only, 200 for training`  \
+    --eval_steps 45 `# 10 for debug mode only, 200 for training`  \
     --output_dir $OUTPUT_PATH \
     --report_to 'wandb' \
     --sample_generate `# test sample generation every once a while`  \
-    --save_steps 200 `# 20 for debug mode only, 200 for training`
+    --save_steps 45 `# 20 for debug mode only, 200 for training`
 
 #    --debug_mode `# only set when it's debug mode` \
