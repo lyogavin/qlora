@@ -48,5 +48,6 @@ python qlora_fact_encoder.py --dataset="/home/ubuntu/qlora/metacritics_fact_enco
     --report_to 'wandb' \
     --sample_generate `# test sample generation every once a while`  \
     --save_steps 45 `# 20 for debug mode only, 200 for training` \
-    --train_on_source true
+    --train_on_source true \
+    --lora_r 256
 #    --debug_mode `# only set when it's debug mode` \
