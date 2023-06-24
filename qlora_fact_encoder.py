@@ -514,6 +514,8 @@ def local_dataset(dataset_name):
         full_dataset = Dataset.from_json(filename=dataset_name, format='jsonlines')
     elif dataset_name.endswith('.csv'):
         full_dataset = Dataset.from_pandas(pd.read_csv(dataset_name))
+    elif dataset_name.endswith('.pickle'):
+        full_dataset = Dataset.from_pandas(pd.read_pickle(dataset_name))
     elif dataset_name.endswith('.tsv'):
         full_dataset = Dataset.from_pandas(pd.read_csv(dataset_name, delimiter='\t'))
     else:
