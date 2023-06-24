@@ -31,7 +31,7 @@ mkdir -p $OUTPUT_PATH
 
 
 
-python qlora_fact_encoder.py --dataset="/home/ubuntu/qlora/metacritics_fact_encoder_training_data.pickle" \
+python qlora_fact_encoder.py --dataset="/home/ubuntu/qlora/metacritics_fact_encoder_training_data_fixed_prompt.pickle" \
     --dataset_format="fact_encoder" `#alpaca-clean has similar format to chinese training dataset` \
     --learning_rate 0.0001 `# QLoRA paper appendix B Table 9 `\
     --per_device_train_batch_size 1 `# fix for fitting mem `\
