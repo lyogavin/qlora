@@ -36,16 +36,16 @@ python qlora_fact_encoder.py --dataset="/home/ubuntu/qlora/metacritics_fact_enco
     --learning_rate 0.0001 `# QLoRA paper appendix B Table 9 `\
     --per_device_train_batch_size 1 `# fix for fitting mem `\
     --gradient_accumulation_steps 16 `# QLoRA paper appendix B Table 9  `\
-    --max_steps 10 `#10 for debug, 45*5 for formal QLoRA paper appendix B Table 9, follow paper setting even though cn data is 690k much bigger than OASST1 9k, batch size considering accum 45*5`\
+    --max_steps 450 `#10 for debug, 45*5 for formal QLoRA paper appendix B Table 9, follow paper setting even though cn data is 690k much bigger than OASST1 9k, batch size considering accum 45*5`\
     --model_name_or_path "timdettmers/guanaco-33b-merged" \
     --source_max_len 42  `# default setting in code, cn model 2048 too long  `\
     --target_max_len 2829 `# follow QLoRA paper appendix B Table 9 `\
     --eval_dataset_size 1 `# mainly for testing, no need to be big` \
     --do_eval \
     --evaluation_strategy "steps" \
-    --eval_steps 10 `# 10 for debug mode only, 200 for training`  \
+    --eval_steps 45 `# 10 for debug mode only, 200 for training`  \
     --output_dir $OUTPUT_PATH \
     --report_to 'wandb' \
     --sample_generate `# test sample generation every once a while`  \
-    --save_steps 10 `# 20 for debug mode only, 200 for training`
-    --debug_mode `# only set when it's debug mode` \
+    --save_steps 45 `# 20 for debug mode only, 200 for training`
+#    --debug_mode `# only set when it's debug mode` \
