@@ -439,6 +439,7 @@ class DataCollatorForCausalLM(object):
             max_length=self.source_max_len,
             truncation=True,
             add_special_tokens=False,
+            return_tensors='pt'
         )
 
         tokenized_rejected = self.tokenizer(
@@ -446,6 +447,7 @@ class DataCollatorForCausalLM(object):
             max_length=self.target_max_len,
             truncation=True,
             add_special_tokens=False,
+            return_tensors='pt'
         )
 
         # Apply padding

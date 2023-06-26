@@ -435,14 +435,12 @@ class DataCollatorForCausalLM(object):
             max_length=self.source_max_len,
             truncation=True,
             add_special_tokens=False,
-            return_tensors='pt'
         )
         tokenized_targets = self.tokenizer(
             targets,
             max_length=self.target_max_len,
             truncation=True,
             add_special_tokens=False,
-            return_tensors='pt'
         )
         # Build the input and labels for causal LM
         input_ids = []
