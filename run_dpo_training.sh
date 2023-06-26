@@ -37,7 +37,8 @@ python qlora_dpo.py --dataset="hh-rlhf" \
     --per_device_train_batch_size 1 `# fix for fitting mem `\
     --gradient_accumulation_steps 16 `# QLoRA paper appendix B Table 9  `\
     --max_steps 10 `#10 for debug, 45*5 for formal QLoRA paper appendix B Table 9, follow paper setting even though cn data is 690k much bigger than OASST1 9k, batch size considering accum 45*5`\
-    --model_name_or_path "timdettmers/qlora-hh-rlhf-7b" \
+    --model_name_or_path "lyogavin/qlora-hh-rlhf-7b-merged" \
+    --reference_model "lyogavin/qlora-hh-rlhf-7b-merged" \
     --source_max_len 42  `# default setting in code, cn model 2048 too long  `\
     --target_max_len 2829 `# follow QLoRA paper appendix B Table 9 `\
     --eval_dataset_size 1 `# mainly for testing, no need to be big` \
