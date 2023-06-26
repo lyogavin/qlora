@@ -449,8 +449,8 @@ class DataCollatorForCausalLM(object):
         )
 
         # Apply padding
-        chosen_input_ids = pad_sequence(tokenized_chosen, batch_first=True, padding_value=self.tokenizer.pad_token_id)
-        rejected_input_ids = pad_sequence(tokenized_rejected, batch_first=True, padding_value=self.tokenizer.pad_token_id)
+        chosen_input_ids = pad_sequence(tokenized_chosen['input_ids'], batch_first=True, padding_value=self.tokenizer.pad_token_id)
+        rejected_input_ids = pad_sequence(tokenized_rejected['input_ids'], batch_first=True, padding_value=self.tokenizer.pad_token_id)
 
         data_dict = {
             'chosen_input_ids': chosen_input_ids,
