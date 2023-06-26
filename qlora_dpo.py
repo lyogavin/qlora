@@ -674,7 +674,7 @@ def _get_batch_logps(logits: torch.FloatTensor, labels: torch.LongTensor, averag
     loss_mask = (labels != tokenizer.pad_token_id)
 
     # dummy token; we'll ignore the losses on these tokens later
-    labels[labels == -100] = 0
+    labels[labels == tokenizer.pad_token_id] = 0
 
     per_token_logps = torch.gather(logits.log_softmax(-1), dim=2, index=labels.unsqueeze(2)).squeeze(2)
 
@@ -711,6 +711,8 @@ def dpo_loss(policy_chosen_logps: torch.FloatTensor,
         ref_logratios = 0
 
     logits = pi_logratios - ref_logratios
+
+    print(f"logits shape, type: {(logits.shape, logits.type())}")
 
     losses = -F.logsigmoid(beta * logits)
     chosen_rewards = beta * (policy_chosen_logps - reference_chosen_logps).detach()
