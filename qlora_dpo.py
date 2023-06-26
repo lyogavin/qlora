@@ -737,10 +737,10 @@ class DPOSeq2SeqTrainer(Seq2SeqTrainer):
             reference_chosen_logits = self.reference_model(input_ids=inputs['chosen_input_ids'], attention_mask=inputs['chosen_attention_mask']).logits
             reference_rejected_logits = self.reference_model(input_ids=inputs['rejected_input_ids'], attention_mask=inputs['rejected_attention_mask']).logits
 
-        policy_chosen_logps = _get_batch_logps(policy_chosen_logits, inputs['chosen_input_ids'], average_log_prob=False, self.tokenizer)
-        policy_rejected_logps = _get_batch_logps(policy_rejected_logits, inputs['rejected_input_ids'], average_log_prob=False, self.tokenizer)
-        reference_chosen_logps = _get_batch_logps(reference_chosen_logits, inputs['chosen_input_ids'], average_log_prob=False, self.tokenizer)
-        reference_rejected_logps = _get_batch_logps(reference_rejected_logits, inputs['rejected_input_ids'], average_log_prob=False, self.tokenizer)
+        policy_chosen_logps = _get_batch_logps(policy_chosen_logits, inputs['chosen_input_ids'], average_log_prob=False, tokenizer=self.tokenizer)
+        policy_rejected_logps = _get_batch_logps(policy_rejected_logits, inputs['rejected_input_ids'], average_log_prob=False, tokenizer=self.tokenizer)
+        reference_chosen_logps = _get_batch_logps(reference_chosen_logits, inputs['chosen_input_ids'], average_log_prob=False, tokenizer=self.tokenizer)
+        reference_rejected_logps = _get_batch_logps(reference_rejected_logits, inputs['rejected_input_ids'], average_log_prob=False, tokenizer=self.tokenizer)
 
         losses, chosen_rewards, rejected_rewards = dpo_loss(
             policy_chosen_logps, policy_rejected_logps, reference_chosen_logps, reference_rejected_logps,
