@@ -654,7 +654,7 @@ def get_last_checkpoint(checkpoint_dir):
     return None, False # first training
 
 def _get_batch_logps(logits: torch.FloatTensor, labels: torch.LongTensor, average_log_prob: bool = False,
-                     tokenizer: transformers.PreTrainedTokenizer) -> torch.FloatTensor:
+                     tokenizer: transformers.PreTrainedTokenizer = None) -> torch.FloatTensor:
     """Compute the log probabilities of the given labels under the given logits.
 
     Args:
