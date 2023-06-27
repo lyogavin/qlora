@@ -462,14 +462,14 @@ class DataCollatorForCausalLM(object):
             tokenized_rejected_input_ids_list.append(torch.tensor(tokenized_rejected_input_ids))
 
         # Apply padding
-        chosen_input_ids = pad_sequence(tokenized_chosen_input_ids_list, batch_first=True, padding_value=self.tokenizer.pad_token_id)
-        rejected_input_ids = pad_sequence(tokenized_rejected_input_ids_list, batch_first=True, padding_value=self.tokenizer.pad_token_id)
+        chosen_input_ids = pad_sequence(tokenized_chosen_input_ids_list, batch_first=True, padding_value=self.tokenizer.eos_token_id)
+        rejected_input_ids = pad_sequence(tokenized_rejected_input_ids_list, batch_first=True, padding_value=self.tokenizer.eos_token_id)
 
         data_dict = {
             'chosen_input_ids': chosen_input_ids,
-            'chosen_attention_mask':chosen_input_ids.ne(self.tokenizer.pad_token_id),
+            'chosen_attention_mask':chosen_input_ids.ne(self.tokenizer.eos_token_id),
             'rejected_input_ids': rejected_input_ids,
-            'rejected_attention_mask':rejected_input_ids.ne(self.tokenizer.pad_token_id),
+            'rejected_attention_mask':rejected_input_ids.ne(self.tokenizer.eos_token_id),
             'return_loss':True
         }
 
