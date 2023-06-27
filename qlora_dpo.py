@@ -39,7 +39,7 @@ from peft import (
 )
 from peft.tuners.lora import LoraLayer
 from transformers.trainer_utils import PREFIX_CHECKPOINT_DIR
-from typing import Optional, Dict, List, Union, Tuple
+from typing import Optional, Dict, List, Union, Tuple, Any
 import torch.nn.functional as F
 
 torch.backends.cuda.matmul.allow_tf32 = True
@@ -765,6 +765,8 @@ class DPOSeq2SeqTrainer(Seq2SeqTrainer):
 
         return (losses.mean(), policy_chosen_outputs) if return_outputs else losses.mean()
 
+
+
 def train():
     hfparser = transformers.HfArgumentParser((
         ModelArguments, DataArguments, TrainingArguments, GenerationArguments
@@ -821,6 +823,7 @@ def train():
                 ),
         })
     data_module = make_data_module(tokenizer=tokenizer, args=args)
+    training_args.label_names = []
     trainer = DPOSeq2SeqTrainer(
         reference_model=reference_model,
         reference_free=args.reference_free,
