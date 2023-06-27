@@ -704,21 +704,25 @@ def dpo_loss(policy_chosen_logps: torch.FloatTensor,
         The losses tensor contains the DPO loss for each example in the batch.
         The chosen_rewards and rejected_rewards tensors contain the rewards for the chosen and rejected responses, respectively.
     """
-    pi_logratios = policy_chosen_logps - policy_rejected_logps
-    ref_logratios = reference_chosen_logps - reference_rejected_logps
 
-    if reference_free:
-        ref_logratios = 0
+    try:
+        pi_logratios = policy_chosen_logps - policy_rejected_logps
+        ref_logratios = reference_chosen_logps - reference_rejected_logps
 
-    logits = pi_logratios - ref_logratios
+        if reference_free:
+            ref_logratios = 0
 
-    print(f"logits shape, type: {(logits.shape, logits.type())}")
+        logits = pi_logratios - ref_logratios
 
-    losses = -F.logsigmoid(beta * logits)
-    chosen_rewards = beta * (policy_chosen_logps - reference_chosen_logps).detach()
-    rejected_rewards = beta * (policy_rejected_logps - reference_rejected_logps).detach()
+        print(f"logits shape, type: {(logits.shape, logits.type())}")
 
-    return losses, chosen_rewards, rejected_rewards
+        losses = -F.logsigmoid(beta * logits)
+        chosen_rewards = beta * (policy_chosen_logps - reference_chosen_logps).detach()
+        rejected_rewards = beta * (policy_rejected_logps - reference_rejected_logps).detach()
+
+        return losses, chosen_rewards, rejected_rewards
+    except Exception as e:
+        print(f"error: {e}")
 
 
 class DPOSeq2SeqTrainer(Seq2SeqTrainer):
