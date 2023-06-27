@@ -782,8 +782,8 @@ class DPOSeq2SeqTrainer(Seq2SeqTrainer):
             policy_chosen_logps, policy_rejected_logps, reference_chosen_logps, reference_rejected_logps,
             beta=self.beta, reference_free=self.reference_free)
 
-        output_dict = {'chosen_rewards':chosen_rewards,
-                       'rejected_rewards': rejected_rewards
+        output_dict = {'chosen_rewards':chosen_rewards.mean(),
+                       'rejected_rewards': rejected_rewards.mean()
                        }
 
         return (losses.mean(), output_dict) if return_outputs else losses.mean()
@@ -871,8 +871,8 @@ def train():
     # Callbacks
     if not args.full_finetune:
         trainer.add_callback(SavePeftModelCallback)
-    if args.sample_generate:
-        trainer.add_callback(SampleGenerateCallback)
+    #if args.sample_generate:
+    #    trainer.add_callback(SampleGenerateCallback)
     if args.do_mmlu_eval:
         if args.mmlu_dataset == 'mmlu-zs':
             mmlu_dataset = load_dataset("json", data_files={
