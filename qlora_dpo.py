@@ -432,8 +432,10 @@ class DataCollatorForCausalLM(object):
 
     def __call__(self, instances: Sequence[Dict]) -> Dict[str, torch.Tensor]:
         # Extract elements
-        chosen = [f"{self.tokenizer.bos_token}{example['chosen']}{self.tokenizer.eos_token}" for example in instances]
-        rejected = [f"{self.tokenizer.bos_token}{example['rejected']}{self.tokenizer.eos_token}" for example in instances]
+        chosen = [f"{self.tokenizer.bos_token}{example['chosen']}" for example in instances]
+        rejected = [f"{self.tokenizer.bos_token}{example['rejected']}" for example in instances]
+        #chosen = [f"{self.tokenizer.bos_token}{example['chosen']}{self.tokenizer.eos_token}" for example in instances]
+        #rejected = [f"{self.tokenizer.bos_token}{example['rejected']}{self.tokenizer.eos_token}" for example in instances]
         # Tokenize
         tokenized_chosen = self.tokenizer(
             chosen,
@@ -758,11 +760,11 @@ class DPOSeq2SeqTrainer(Seq2SeqTrainer):
     def compute_loss(self, model, inputs, return_outputs=False):
         self.reference_model.eval()
 
-        print(f"pad id: {self.tokenizer.pad_token_id}")
-        print(f"inputs['chosen_input_ids'] shape: {inputs['chosen_input_ids'].shape}")
-        print(f"inputs['chosen_input_ids']: {inputs['chosen_input_ids']}")
-        print(f"inputs['chosen_attention_mask'] shape: {inputs['chosen_attention_mask'].shape}")
-        print(f"inputs['chosen_attention_mask']: {inputs['chosen_attention_mask']}")
+        #print(f"pad id: {self.tokenizer.pad_token_id}")
+        #print(f"inputs['chosen_input_ids'] shape: {inputs['chosen_input_ids'].shape}")
+        #print(f"inputs['chosen_input_ids']: {inputs['chosen_input_ids']}")
+        #print(f"inputs['chosen_attention_mask'] shape: {inputs['chosen_attention_mask'].shape}")
+        #print(f"inputs['chosen_attention_mask']: {inputs['chosen_attention_mask']}")
         with torch.no_grad():
             reference_chosen_logits = self.reference_model(input_ids=inputs['chosen_input_ids'], attention_mask=inputs['chosen_attention_mask']).logits
             reference_rejected_logits = self.reference_model(input_ids=inputs['rejected_input_ids'], attention_mask=inputs['rejected_attention_mask']).logits
