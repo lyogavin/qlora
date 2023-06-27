@@ -773,9 +773,9 @@ class DPOSeq2SeqTrainer(Seq2SeqTrainer):
         return (losses.mean(), output_dict) if return_outputs else losses.mean()
 
 def compute_metrics(ep: EvalPrediction):
-    print(f"EvalPrediction predictions shape: {len(ep.predictions)}")
-    print(f"EvalPrediction label_ids shape: {ep.label_ids.shape}")
-    print(f"EvalPrediction inputs shape: {ep.inputs.shape}")
+    print(f"EvalPrediction predictions shape: {[x.shape for x in ep.predictions]}")
+    print(f"EvalPrediction label_ids shape: {[x.shape for x in ep.label_ids]}")
+    print(f"EvalPrediction inputs shape: {[x.shape for x in ep.inputs]}")
 
 def train():
     hfparser = transformers.HfArgumentParser((
