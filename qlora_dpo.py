@@ -743,6 +743,7 @@ class DPOSeq2SeqTrainer(Seq2SeqTrainer):
         self.reference_model = reference_model
         self.beta = beta
         self.reference_free = reference_free
+        self.label_names = []
 
     def compute_loss(self, model, inputs, return_outputs=False):
         policy_chosen_outputs = model(input_ids=inputs['chosen_input_ids'], attention_mask=inputs['chosen_attention_mask'])
