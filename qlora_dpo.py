@@ -440,7 +440,7 @@ class DataCollatorForCausalLM(object):
             max_length=self.source_max_len,
             truncation=True,
             add_special_tokens=False,
-            return_tensors='pt'
+            #return_tensors='pt'
         )
 
         tokenized_rejected = self.tokenizer(
@@ -448,12 +448,20 @@ class DataCollatorForCausalLM(object):
             max_length=self.target_max_len,
             truncation=True,
             add_special_tokens=False,
-            return_tensors='pt'
+            #return_tensors='pt'
         )
+        tokenized_chosen_input_ids_list = []
+        tokenized_rejected_input_ids_list = []
+        for tokenized_chosen_input_ids, tokenized_rejected_input_ids in zip(
+            tokenized_chosen['input_ids'],
+            tokenized_rejected['input_ids']
+        ):
+            tokenized_chosen_input_ids_list.append(torch.tensor(tokenized_chosen_input_ids))
+            tokenized_rejected_input_ids_list.append(torch.tensor(tokenized_rejected_input_ids))
 
         # Apply padding
-        chosen_input_ids = pad_sequence(tokenized_chosen['input_ids'], batch_first=True, padding_value=self.tokenizer.pad_token_id)
-        rejected_input_ids = pad_sequence(tokenized_rejected['input_ids'], batch_first=True, padding_value=self.tokenizer.pad_token_id)
+        chosen_input_ids = pad_sequence(tokenized_chosen_input_ids_list, batch_first=True, padding_value=self.tokenizer.pad_token_id)
+        rejected_input_ids = pad_sequence(tokenized_rejected_input_ids_list, batch_first=True, padding_value=self.tokenizer.pad_token_id)
 
         data_dict = {
             'chosen_input_ids': chosen_input_ids,
