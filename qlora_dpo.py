@@ -756,14 +756,15 @@ class DPOSeq2SeqTrainer(Seq2SeqTrainer):
         self.label_names = []
 
     def compute_loss(self, model, inputs, return_outputs=False):
+        with torch.no_grad():
+            reference_chosen_logits = self.reference_model(input_ids=inputs['chosen_input_ids'], attention_mask=inputs['chosen_attention_mask']).logits
+            reference_rejected_logits = self.reference_model(input_ids=inputs['rejected_input_ids'], attention_mask=inputs['rejected_attention_mask']).logits
+            
         policy_chosen_outputs = model(input_ids=inputs['chosen_input_ids'], attention_mask=inputs['chosen_attention_mask'])
 
         policy_chosen_logits = policy_chosen_outputs.logits
         policy_rejected_logits = model(input_ids=inputs['rejected_input_ids'], attention_mask=inputs['rejected_attention_mask']).logits
 
-        with torch.no_grad():
-            reference_chosen_logits = self.reference_model(input_ids=inputs['chosen_input_ids'], attention_mask=inputs['chosen_attention_mask']).logits
-            reference_rejected_logits = self.reference_model(input_ids=inputs['rejected_input_ids'], attention_mask=inputs['rejected_attention_mask']).logits
 
         policy_chosen_logps = _get_batch_logps(policy_chosen_logits, inputs['chosen_input_ids'], average_log_prob=False, tokenizer=self.tokenizer)
         policy_rejected_logps = _get_batch_logps(policy_rejected_logits, inputs['rejected_input_ids'], average_log_prob=False, tokenizer=self.tokenizer)
