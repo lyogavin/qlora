@@ -835,6 +835,8 @@ def train():
         **{k:v for k,v in data_module.items() if k != 'predict_dataset'},
     )
 
+    print(f"trainer label names: {trainer.label_names}")
+
     # Callbacks
     if not args.full_finetune:
         trainer.add_callback(SavePeftModelCallback)
