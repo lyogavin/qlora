@@ -773,7 +773,7 @@ class DPOSeq2SeqTrainer(Seq2SeqTrainer):
         return (losses.mean(), output_dict) if return_outputs else losses.mean()
 
 def compute_metrics(ep: EvalPrediction):
-    print(f"EvalPrediction predictions shape: {ep.predictions.shape}")
+    print(f"EvalPrediction predictions shape: {len(ep.predictions)}")
     print(f"EvalPrediction label_ids shape: {ep.label_ids.shape}")
     print(f"EvalPrediction inputs shape: {ep.inputs.shape}")
 
