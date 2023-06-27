@@ -819,6 +819,7 @@ def train():
         device_map="auto",
         torch_dtype=(torch.float32 if args.fp16 else (torch.bfloat16 if args.bf16 else torch.float32)),
     )
+    print(f"reference_model: {reference_model}")
     model.config.use_cache = False
     print_trainable_parameters(args, model)
     logger.info('loaded model')
