@@ -774,8 +774,8 @@ class DPOSeq2SeqTrainer(Seq2SeqTrainer):
 
 def compute_metrics(ep: EvalPrediction):
     print(f"EvalPrediction predictions shape: {[x.shape for x in ep.predictions]}")
-    print(f"EvalPrediction label_ids shape: {[x.shape for x in ep.label_ids]}")
-    print(f"EvalPrediction inputs shape: {[x.shape for x in ep.inputs]}")
+    #print(f"EvalPrediction label_ids shape: {[x.shape for x in ep.label_ids]}")
+    #print(f"EvalPrediction inputs shape: {[x.shape for x in ep.inputs]}")
 
 def train():
     hfparser = transformers.HfArgumentParser((

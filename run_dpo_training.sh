@@ -41,14 +41,14 @@ python qlora_dpo.py --dataset="hh-rlhf" \
     --reference_model "lyogavin/qlora-hh-rlhf-7b-merged" \
     --source_max_len 512  `# default setting in code, cn model 2048 too long  `\
     --target_max_len 512 `# follow QLoRA paper appendix B Table 9 `\
-    --eval_dataset_size 1 `# mainly for testing, no need to be big` \
+    --eval_dataset_size 2 `# mainly for testing, no need to be big` \
     --do_eval \
     --evaluation_strategy "steps" \
     --eval_steps 1 `# 10 for debug mode only, 200 for training`  \
     --output_dir $OUTPUT_PATH \
     --report_to 'wandb' \
     --sample_generate `# test sample generation every once a while`  \
-    --save_steps 1 `# 20 for debug mode only, 200 for training` \
+    --save_steps 2 `# 20 for debug mode only, 200 for training` \
     --train_on_source true \
     --lora_r 256
     --debug_mode `# only set when it's debug mode` \
