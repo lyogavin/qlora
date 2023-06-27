@@ -716,7 +716,10 @@ def dpo_loss(policy_chosen_logps: torch.FloatTensor,
 
         print(f"logits shape, type: {(logits.shape, logits.type())}")
 
-        losses = -F.logsigmoid(beta * logits)
+        beta_logits = beta * logits
+        print(f"beta_logits shape, type, value: {(beta_logits.shape, beta_logits.type(), beta_logits)}")
+
+        losses = -F.logsigmoid(beta_logits)
         chosen_rewards = beta * (policy_chosen_logps - reference_chosen_logps).detach()
         rejected_rewards = beta * (policy_rejected_logps - reference_rejected_logps).detach()
 
