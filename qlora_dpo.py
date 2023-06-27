@@ -757,6 +757,8 @@ class DPOSeq2SeqTrainer(Seq2SeqTrainer):
 
     def compute_loss(self, model, inputs, return_outputs=False):
         self.reference_model.eval()
+
+        print(f"inputs['chosen_input_ids']: {inputs['chosen_input_ids']}")
         with torch.no_grad():
             reference_chosen_logits = self.reference_model(input_ids=inputs['chosen_input_ids'], attention_mask=inputs['chosen_attention_mask']).logits
             reference_rejected_logits = self.reference_model(input_ids=inputs['rejected_input_ids'], attention_mask=inputs['rejected_attention_mask']).logits
