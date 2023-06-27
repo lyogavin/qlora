@@ -782,8 +782,8 @@ class DPOSeq2SeqTrainer(Seq2SeqTrainer):
             policy_chosen_logps, policy_rejected_logps, reference_chosen_logps, reference_rejected_logps,
             beta=self.beta, reference_free=self.reference_free)
 
-        output_dict = {'chosen_rewards': float(chosen_rewards.mean()),
-                       'rejected_rewards': float(rejected_rewards.mean())
+        output_dict = {'chosen_rewards': chosen_rewards.mean(),
+                       'rejected_rewards': rejected_rewards.mean()
                        }
 
         return (losses.mean(), output_dict) if return_outputs else losses.mean()
@@ -793,7 +793,7 @@ def compute_metrics(ep: EvalPrediction):
     #print(f"EvalPrediction label_ids shape: {[x.shape for x in ep.label_ids]}")
     #print(f"EvalPrediction inputs shape: {[x.shape for x in ep.inputs]}")
 
-    return {'chosen_rewards': ep.predictions[0], 'rejected_rewards': ep.predictions[1]}
+    return {'chosen_rewards': float(ep.predictions[0]), 'rejected_rewards': float(ep.predictions[1])}
 
 def train():
     hfparser = transformers.HfArgumentParser((
