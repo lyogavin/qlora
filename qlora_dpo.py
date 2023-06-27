@@ -459,6 +459,7 @@ class DataCollatorForCausalLM(object):
             'chosen_attention_mask':chosen_input_ids.ne(self.tokenizer.pad_token_id),
             'rejected_input_ids': rejected_input_ids,
             'rejected_attention_mask':rejected_input_ids.ne(self.tokenizer.pad_token_id),
+            'return_loss':True
         }
 
         return data_dict
