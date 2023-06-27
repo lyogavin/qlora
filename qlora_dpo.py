@@ -25,7 +25,8 @@ from transformers import (
     set_seed, 
     Seq2SeqTrainer,
     BitsAndBytesConfig,
-    LlamaTokenizer
+    LlamaTokenizer,
+    EvalPrediction
 
 )
 from datasets import load_dataset, Dataset
@@ -765,9 +766,16 @@ class DPOSeq2SeqTrainer(Seq2SeqTrainer):
             policy_chosen_logps, policy_rejected_logps, reference_chosen_logps, reference_rejected_logps,
             beta=self.beta, reference_free=self.reference_free)
 
-        return (losses.mean(), policy_chosen_outputs) if return_outputs else losses.mean()
+        output_dict = {'chosen_rewards':chosen_rewards,
+                       'rejected_rewards': rejected_rewards
+                       }
 
+        return (losses.mean(), output_dict) if return_outputs else losses.mean()
 
+def compute_metrics(ep: EvalPrediction):
+    print(f"EvalPrediction predictions shape: {ep.predictions.shape}")
+    print(f"EvalPrediction label_ids shape: {ep.label_ids.shape}")
+    print(f"EvalPrediction inputs shape: {ep.inputs.shape}")
 
 def train():
     hfparser = transformers.HfArgumentParser((
@@ -833,10 +841,12 @@ def train():
         model=model, 
         tokenizer=tokenizer,
         args=training_args,
+        compute_metrics=compute_metrics,
         **{k:v for k,v in data_module.items() if k != 'predict_dataset'},
     )
 
     print(f"trainer label names: {trainer.label_names}")
+    print(f"trainer can_return_loss: {trainer.can_return_loss}")
 
     # Callbacks
     if not args.full_finetune:
