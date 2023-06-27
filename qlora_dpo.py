@@ -859,8 +859,8 @@ def train():
     # Callbacks
     if not args.full_finetune:
         trainer.add_callback(SavePeftModelCallback)
-    #if args.sample_generate:
-    #    trainer.add_callback(SampleGenerateCallback)
+    if args.sample_generate:
+        trainer.add_callback(SampleGenerateCallback)
     if args.do_mmlu_eval:
         if args.mmlu_dataset == 'mmlu-zs':
             mmlu_dataset = load_dataset("json", data_files={
