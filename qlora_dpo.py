@@ -714,11 +714,11 @@ def dpo_loss(policy_chosen_logps: torch.FloatTensor,
 
         logits = pi_logratios - ref_logratios
 
-        print(f"logits shape, type, value: {(logits.shape, logits.type(), logits)}")
-        print(f"beta value, type: {(beta, type(beta))}")
+        #print(f"logits shape, type, value: {(logits.shape, logits.type(), logits)}")
+        #print(f"beta value, type: {(beta, type(beta))}")
 
         beta_logits = beta * logits
-        print(f"beta_logits shape, type, value: {(beta_logits.shape, beta_logits.type(), beta_logits)}")
+        #print(f"beta_logits shape, type, value: {(beta_logits.shape, beta_logits.type(), beta_logits)}")
 
         losses = -F.logsigmoid(beta_logits)
         chosen_rewards = beta * (policy_chosen_logps - reference_chosen_logps).detach()
@@ -741,7 +741,7 @@ class DPOSeq2SeqTrainer(Seq2SeqTrainer):
                  *argv, **kargv):
         super().__init__(*argv, **kargv)
         self.reference_model = reference_model
-        self.beta = beta,
+        self.beta = beta
         self.reference_free = reference_free
 
     def compute_loss(self, model, inputs, return_outputs=False):
