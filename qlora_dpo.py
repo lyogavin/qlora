@@ -714,7 +714,8 @@ def dpo_loss(policy_chosen_logps: torch.FloatTensor,
 
         logits = pi_logratios - ref_logratios
 
-        print(f"logits shape, type: {(logits.shape, logits.type())}")
+        print(f"logits shape, type, value: {(logits.shape, logits.type(), logits)}")
+        print(f"beta value, type: {(beta, type(beta))}")
 
         beta_logits = beta * logits
         print(f"beta_logits shape, type, value: {(beta_logits.shape, beta_logits.type(), beta_logits)}")
