@@ -756,10 +756,11 @@ class DPOSeq2SeqTrainer(Seq2SeqTrainer):
         self.label_names = []
 
     def compute_loss(self, model, inputs, return_outputs=False):
+        self.reference_model.eval()
         with torch.no_grad():
             reference_chosen_logits = self.reference_model(input_ids=inputs['chosen_input_ids'], attention_mask=inputs['chosen_attention_mask']).logits
             reference_rejected_logits = self.reference_model(input_ids=inputs['rejected_input_ids'], attention_mask=inputs['rejected_attention_mask']).logits
-            
+
         policy_chosen_outputs = model(input_ids=inputs['chosen_input_ids'], attention_mask=inputs['chosen_attention_mask'])
 
         policy_chosen_logits = policy_chosen_outputs.logits
@@ -806,8 +807,9 @@ def train():
     model = get_accelerate_model(args, checkpoint_dir)
     reference_model = AutoModelForCausalLM.from_pretrained(
         args.reference_model,
-        torch_dtype=torch.float16,
+        #torch_dtype=torch.float16,
         device_map="auto",
+        torch_dtype=(torch.float32 if args.fp16 else (torch.bfloat16 if args.bf16 else torch.float32)),
     )
     model.config.use_cache = False
     print_trainable_parameters(args, model)
