@@ -452,24 +452,22 @@ class DataCollatorForCausalLM(object):
             add_special_tokens=False,
             #return_tensors='pt'
         )
-        tokenized_chosen_input_ids_list = []
-        tokenized_rejected_input_ids_list = []
-        for tokenized_chosen_input_ids, tokenized_rejected_input_ids in zip(
-            tokenized_chosen['input_ids'],
-            tokenized_rejected['input_ids']
-        ):
-            tokenized_chosen_input_ids_list.append(torch.tensor(tokenized_chosen_input_ids))
-            tokenized_rejected_input_ids_list.append(torch.tensor(tokenized_rejected_input_ids))
+        tokenized_input_ids_list = []
+        for tokenized_chosen_input_ids in tokenized_chosen['input_ids']:
+            tokenized_input_ids_list.append(torch.tensor(tokenized_chosen_input_ids))
+
+        for tokenized_rejected_input_ids in tokenized_rejected['input_ids']:
+            tokenized_input_ids_list.append(torch.tensor(tokenized_rejected_input_ids))
+
 
         # Apply padding
-        chosen_input_ids = pad_sequence(tokenized_chosen_input_ids_list, batch_first=True, padding_value=self.tokenizer.eos_token_id)
-        rejected_input_ids = pad_sequence(tokenized_rejected_input_ids_list, batch_first=True, padding_value=self.tokenizer.eos_token_id)
+        all_input_ids = pad_sequence(tokenized_input_ids_list, batch_first=True, padding_value=self.tokenizer.eos_token_id)
 
         data_dict = {
-            'chosen_input_ids': chosen_input_ids,
-            'chosen_attention_mask':chosen_input_ids.ne(self.tokenizer.eos_token_id),
-            'rejected_input_ids': rejected_input_ids,
-            'rejected_attention_mask':rejected_input_ids.ne(self.tokenizer.eos_token_id),
+            'chosen_input_ids': all_input_ids[:len(instances)],
+            'chosen_attention_mask':all_input_ids[:len(instances)].ne(self.tokenizer.eos_token_id),
+            'rejected_input_ids': all_input_ids[len(instances):],
+            'rejected_attention_mask':all_input_ids[len(instances):].ne(self.tokenizer.eos_token_id),
             'return_loss':True
         }
 
