@@ -722,7 +722,12 @@ def dpo_loss(policy_chosen_logps: torch.FloatTensor,
 
         return losses, chosen_rewards, rejected_rewards
     except Exception as e:
+        import traceback
+        import sys
+
         print(f"error: {e}")
+        print(traceback.format_exc())
+        raise e
 
 
 class DPOSeq2SeqTrainer(Seq2SeqTrainer):
