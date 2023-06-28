@@ -308,6 +308,49 @@ class SavePeftModelCallback(transformers.TrainerCallback):
         touch(join(args.output_dir, 'completed'))
         self.save_model(args, state, kwargs)
 
+def get_reference_model(args, checkpoint_dir):
+
+    n_gpus = torch.cuda.device_count()
+    max_memory = f'{args.max_memory_MB}MB'
+    max_memory = {i: max_memory for i in range(n_gpus)}
+
+    if args.full_finetune: assert args.bits in [16, 32]
+
+    logger.info(f'loading reference model {args.reference_model}...')
+    compute_dtype = (torch.float16 if args.fp16 else (torch.bfloat16 if args.bf16 else torch.float32))
+    model = AutoModelForCausalLM.from_pretrained(
+        args.reference_model,
+        cache_dir=args.cache_dir,
+        load_in_4bit=args.bits == 4,
+        load_in_8bit=args.bits == 8,
+        device_map='auto',
+        max_memory=max_memory,
+        quantization_config=BitsAndBytesConfig(
+            load_in_4bit=args.bits == 4,
+            load_in_8bit=args.bits == 8,
+            llm_int8_threshold=6.0,
+            llm_int8_has_fp16_weight=False,
+            bnb_4bit_compute_dtype=compute_dtype,
+            bnb_4bit_use_double_quant=args.double_quant,
+            bnb_4bit_quant_type=args.quant_type
+        ),
+        torch_dtype=(torch.float32 if args.fp16 else (torch.bfloat16 if args.bf16 else torch.float32)),
+        trust_remote_code=args.trust_remote_code,
+    )
+    if compute_dtype == torch.float16 and args.bits == 4:
+        major, minor = torch.cuda.get_device_capability()
+        if major >= 8:
+            logger.info('='*80)
+            logger.info('Your GPU supports bfloat16, you can accelerate training with the argument --bf16')
+            logger.info('='*80)
+
+    setattr(model, 'model_parallel', True)
+    setattr(model, 'is_parallelizable', True)
+
+    model.config.torch_dtype=(torch.float32 if args.fp16 else (torch.bfloat16 if args.bf16 else torch.float32))
+    return model
+
+
 def get_accelerate_model(args, checkpoint_dir):
 
     n_gpus = torch.cuda.device_count()
@@ -816,12 +859,14 @@ def train():
         logger.info('Detected that training was already completed!')
 
     model = get_accelerate_model(args, checkpoint_dir)
-    reference_model = AutoModelForCausalLM.from_pretrained(
-        args.reference_model,
-        #torch_dtype=torch.float16,
-        device_map="auto",
-        torch_dtype=(torch.float32 if args.fp16 else (torch.bfloat16 if args.bf16 else torch.float32)),
-    )
+    #reference_model = AutoModelForCausalLM.from_pretrained(
+    #    args.reference_model,
+    #    #torch_dtype=torch.float16,
+    #    device_map="auto",
+    #    torch_dtype=(torch.float32 if args.fp16 else (torch.bfloat16 if args.bf16 else torch.float32)),
+    #)
+
+    reference_model = get_reference_model(args, checkpoint_dir)
     print(f"reference_model: {reference_model}")
     model.config.use_cache = False
     print_trainable_parameters(args, model)
