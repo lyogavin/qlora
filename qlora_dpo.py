@@ -676,6 +676,10 @@ def make_data_module(tokenizer: transformers.PreTrainedTokenizer, args) -> Dict:
             eval_dataset = eval_dataset.select(range(args.max_eval_samples))
         if args.group_by_length:
             eval_dataset = eval_dataset.map(lambda x: {'length': len(x['chosen']) + len(x['rejected'])})
+
+
+        logger.info(f"eval dataset: {eval_dataset}")
+        
     if args.do_train:
         train_dataset = dataset['train']
         if args.max_train_samples is not None and len(train_dataset) > args.max_train_samples:
@@ -919,8 +923,8 @@ def train():
     # Callbacks
     if not args.full_finetune:
         trainer.add_callback(SavePeftModelCallback)
-    #if args.sample_generate:
-    #    trainer.add_callback(SampleGenerateCallback)
+    if args.sample_generate:
+        trainer.add_callback(SampleGenerateCallback)
     if args.do_mmlu_eval:
         if args.mmlu_dataset == 'mmlu-zs':
             mmlu_dataset = load_dataset("json", data_files={
