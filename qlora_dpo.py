@@ -504,7 +504,7 @@ class DataCollatorForCausalLM(object):
 
 
         # Apply padding
-        all_input_ids = pad_sequence(tokenized_input_ids_list, batch_first=True, padding_value=self.tokenizer.eos_token_id)
+        all_input_ids = pad_sequence(tokenized_input_ids_list, batch_first=True, padding_value=self.tokenizer.pad_token_id)
 
         data_dict = {
             'chosen_input_ids': all_input_ids[:len(instances)],
