@@ -508,9 +508,9 @@ class DataCollatorForCausalLM(object):
 
         data_dict = {
             'chosen_input_ids': all_input_ids[:len(instances)],
-            'chosen_attention_mask':all_input_ids[:len(instances)].ne(self.tokenizer.eos_token_id),
+            'chosen_attention_mask':all_input_ids[:len(instances)].ne(self.tokenizer.pad_token_id),
             'rejected_input_ids': all_input_ids[len(instances):],
-            'rejected_attention_mask':all_input_ids[len(instances):].ne(self.tokenizer.eos_token_id),
+            'rejected_attention_mask':all_input_ids[len(instances):].ne(self.tokenizer.pad_token_id),
             'return_loss':True
         }
 
