@@ -255,9 +255,9 @@ class SampleGenerateCallback(transformers.TrainerCallback):
     def on_evaluate(self, args, state, control, **kwargs):
         logger.info("on_evaluate in SampleGenerateCallback...")
         sample_inputs = [
-            '用一句话描述地球为什么是独一无二的。',
-            '中国是否应该推出刺激政策救楼市？',
-            '如何更好地融入新工作圈子'
+            '如果一头大象站在一张脆弱的椅子上，椅子会破裂吗？',
+            '什么是机器学习？它有哪些应用场景？',
+            '如果细菌对抗生素产生了耐药性，那么为什么它们不能对所有抗生素都免疫？'
         ]
         if "model" in kwargs:
             for sample_input in sample_inputs:
@@ -271,7 +271,7 @@ class SampleGenerateCallback(transformers.TrainerCallback):
                 input_ids = input_ids.to('cuda')
                 generation_output = model.generate(
                     input_ids=input_ids,
-                    max_new_tokens=70,
+                    max_new_tokens=370,
                 )
                 #print(generation_output)
                 logger.info(f"sample output: {tokenizer.decode(generation_output[0])}")
@@ -432,8 +432,8 @@ class DataCollatorForCausalLM(object):
 
     def __call__(self, instances: Sequence[Dict]) -> Dict[str, torch.Tensor]:
         # Extract elements
-        chosen = [f"{self.tokenizer.bos_token}{example['chosen']}" for example in instances]
-        rejected = [f"{self.tokenizer.bos_token}{example['rejected']}" for example in instances]
+        chosen = [f"{self.tokenizer.bos_token}{example['chosen']}{self.tokenizer.eos_token}" for example in instances]
+        rejected = [f"{self.tokenizer.bos_token}{example['rejected']}{self.tokenizer.eos_token}" for example in instances]
         #chosen = [f"{self.tokenizer.bos_token}{example['chosen']}{self.tokenizer.eos_token}" for example in instances]
         #rejected = [f"{self.tokenizer.bos_token}{example['rejected']}{self.tokenizer.eos_token}" for example in instances]
         # Tokenize
@@ -577,7 +577,10 @@ def make_data_module(tokenizer: transformers.PreTrainedTokenizer, args) -> Dict:
                 except:
                     raise ValueError(f"Error loading dataset from {dataset_name}")
             else:
-                raise NotImplementedError(f"Dataset {dataset_name} not implemented yet.")
+                try:
+                    load_dataset(dataset_name)
+                except Exception:
+                    raise NotImplementedError(f"Dataset {dataset_name} not implemented yet.")
 
     def format_dataset(dataset, dataset_format):
         if (

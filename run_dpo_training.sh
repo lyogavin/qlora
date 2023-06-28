@@ -31,24 +31,24 @@ mkdir -p $OUTPUT_PATH
 
 
 
-python qlora_dpo.py --dataset="hh-rlhf" \
+python qlora_dpo.py --dataset="lyogavin/Anima33B_rlhf_belle_eval_1k" \
     --dataset_format="hh-rlhf" `#alpaca-clean has similar format to chinese training dataset` \
     --learning_rate 0.0001 `# QLoRA paper appendix B Table 9 `\
     --per_device_train_batch_size 1 `# fix for fitting mem `\
     --gradient_accumulation_steps 16 `# QLoRA paper appendix B Table 9  `\
-    --max_steps 1000 `#10 for debug, 45*5 for formal QLoRA paper appendix B Table 9, follow paper setting even though cn data is 690k much bigger than OASST1 9k, batch size considering accum 45*5`\
-    --model_name_or_path "lyogavin/qlora-hh-rlhf-7b-merged" \
-    --reference_model "lyogavin/qlora-hh-rlhf-7b-merged" \
-    --source_max_len 531  `# default setting in code, cn model 2048 too long  `\
-    --target_max_len 531 `# follow QLoRA paper appendix B Table 9 `\
+    --max_steps 100 `#10 for debug, 45*5 for formal QLoRA paper appendix B Table 9, follow paper setting even though cn data is 690k much bigger than OASST1 9k, batch size considering accum 45*5`\
+    --model_name_or_path "lyogavin/Anima33B" \
+    --reference_model "lyogavin/Anima33B" \
+    --source_max_len 1465  `# default setting in code, cn model 2048 too long  `\
+    --target_max_len 1465 `# follow QLoRA paper appendix B Table 9 `\
     --eval_dataset_size 2 `# mainly for testing, no need to be big` \
     --do_eval \
     --evaluation_strategy "steps" \
-    --eval_steps 100 `# 10 for debug mode only, 200 for training`  \
+    --eval_steps 10 `# 10 for debug mode only, 200 for training`  \
     --output_dir $OUTPUT_PATH \
     --report_to 'wandb' \
     --sample_generate `# test sample generation every once a while`  \
-    --save_steps 100 `# 20 for debug mode only, 200 for training` \
+    --save_steps 10 `# 20 for debug mode only, 200 for training` \
     --train_on_source true \
     --lora_r 256
     #--debug_mode `# only set when it's debug mode` \
