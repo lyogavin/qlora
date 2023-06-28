@@ -33,7 +33,7 @@ mkdir -p $OUTPUT_PATH
 
 python qlora_dpo.py --dataset="lyogavin/Anima33B_rlhf_belle_eval_1k" \
     --dataset_format="hh-rlhf" `#alpaca-clean has similar format to chinese training dataset` \
-    --learning_rate 0.00001 `# QLoRA paper appendix B Table 9  0.0001 no converge -> 0.00001`\
+    --learning_rate 0.0001 `# QLoRA paper appendix B Table 9 `\
     --per_device_train_batch_size 1 `# fix for fitting mem `\
     --gradient_accumulation_steps 16 `# QLoRA paper appendix B Table 9  `\
     --max_steps 100 `#10 for debug, 45*5 for formal QLoRA paper appendix B Table 9, follow paper setting even though cn data is 690k much bigger than OASST1 9k, batch size considering accum 45*5`\
