@@ -845,7 +845,7 @@ def compute_metrics(ep: EvalPrediction):
     #print(f"EvalPrediction label_ids shape: {[x.shape for x in ep.label_ids]}")
     #print(f"EvalPrediction inputs shape: {[x.shape for x in ep.inputs]}")
 
-    return {'chosen_rewards': float(ep.predictions[0]), 'rejected_rewards': float(ep.predictions[1])}
+    return {'chosen_rewards': ep.predictions[0].mean(), 'rejected_rewards': ep.predictions[1].mean()}
 
 def train():
     hfparser = transformers.HfArgumentParser((
