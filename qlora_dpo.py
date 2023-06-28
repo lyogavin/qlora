@@ -578,7 +578,7 @@ def make_data_module(tokenizer: transformers.PreTrainedTokenizer, args) -> Dict:
                     raise ValueError(f"Error loading dataset from {dataset_name}")
             else:
                 try:
-                    load_dataset(dataset_name)
+                    return load_dataset(dataset_name)
                 except Exception:
                     raise NotImplementedError(f"Dataset {dataset_name} not implemented yet.")
 
