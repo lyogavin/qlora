@@ -1,0 +1,1079 @@
+2023-06-28 12:53:23,821 [INFO] args: Namespace(__cached__setup_devices=device(type='cuda', index=0), _n_gpu=1, adafactor=False, adam8bit=False, adam_beta1=0.9, adam_beta2=0.999, adam_epsilon=1e-08, auto_find_batch_size=False, beta=0.1, bf16=False, bf16_full_eval=False, bits=4, cache_dir=None, data_seed=None, dataloader_drop_last=False, dataloader_num_workers=0, dataloader_pin_memory=True, dataset='lyogavin/Anima33B_rlhf_belle_eval_1k', dataset_format='hh-rlhf', ddp_backend=None, ddp_broadcast_buffers=None, ddp_bucket_cap_mb=None, ddp_find_unused_parameters=None, ddp_timeout=1800, debug=[], debug_mode=False, deepspeed=None, deepspeed_plugin=None, disable_tqdm=False, distributed_state=Distributed environment: NO
+Num processes: 1
+Process index: 0
+Local process index: 0
+Device: cuda
+, do_eval=True, do_mmlu_eval=False, do_predict=False, do_train=True, double_quant=True, eval_accumulation_steps=None, eval_dataset_size=2, eval_delay=0, eval_steps=10, evaluation_strategy=<IntervalStrategy.STEPS: 'steps'>, fp16=False, fp16_backend='auto', fp16_full_eval=False, fp16_opt_level='O1', fsdp=[], fsdp_config={'fsdp_min_num_params': 0, 'xla': False, 'xla_fsdp_grad_ckpt': False}, fsdp_min_num_params=0, fsdp_transformer_layer_cls_to_wrap=None, full_determinism=False, full_finetune=False, generation_config=GenerationConfig {
+  "max_new_tokens": 256,
+  "transformers_version": "4.31.0.dev0"
+}
+, generation_max_length=None, generation_num_beams=None, gradient_accumulation_steps=16, gradient_checkpointing=True, greater_is_better=None, group_by_length=True, half_precision_backend='auto', hub_model_id=None, hub_private_repo=False, hub_strategy=<HubStrategy.EVERY_SAVE: 'every_save'>, hub_token=None, ignore_data_skip=False, include_inputs_for_metrics=False, jit_mode_eval=False, label_names=None, label_smoothing_factor=0.0, learning_rate=0.0001, length_column_name='length', load_best_model_at_end=False, local_rank=0, log_level='passive', log_level_replica='warning', log_on_each_node=True, logging_dir='/home/ubuntu/cloudfs/saved_models/qlora_cn/output_1687956791/runs/Jun28_12-53-23_209-20-156-161', logging_first_step=False, logging_nan_inf_filter=True, logging_steps=10, logging_strategy=<IntervalStrategy.STEPS: 'steps'>, lora_alpha=16, lora_dropout=0.0, lora_r=256, lr_scheduler_type=<SchedulerType.CONSTANT: 'constant'>, max_eval_samples=None, max_grad_norm=0.3, max_memory_MB=80000, max_mmlu_samples=None, max_steps=100, max_train_samples=None, metric_for_best_model=None, mmlu_dataset='mmlu-fs', mmlu_source_max_len=2048, mmlu_split='eval', model_name_or_path='lyogavin/Anima33B-merged', mp_parameters='', no_cuda=False, num_train_epochs=3.0, optim=<OptimizerNames.PAGED_ADAMW: 'paged_adamw_32bit'>, optim_args=None, output_dir='/home/ubuntu/cloudfs/saved_models/qlora_cn/output_1687956791', overwrite_output_dir=False, past_index=-1, per_device_eval_batch_size=8, per_device_train_batch_size=1, per_gpu_eval_batch_size=None, per_gpu_train_batch_size=None, predict_with_generate=False, prediction_loss_only=False, push_to_hub=False, push_to_hub_model_id=None, push_to_hub_organization=None, push_to_hub_token=None, quant_type='nf4', ray_scope='last', reference_free=False, reference_model='lyogavin/Anima33B-merged', remove_unused_columns=False, report_to=['wandb'], resume_from_checkpoint=None, run_name='/home/ubuntu/cloudfs/saved_models/qlora_cn/output_1687956791', sample_generate=True, save_on_each_node=False, save_safetensors=False, save_steps=10, save_strategy=<IntervalStrategy.STEPS: 'steps'>, save_total_limit=40, seed=42, sharded_ddp=[], skip_memory_metrics=True, sortish_sampler=False, source_max_len=600, target_max_len=600, tf32=None, torch_compile=False, torch_compile_backend=None, torch_compile_mode=None, torchdynamo=None, tpu_metrics_debug=False, tpu_num_cores=None, train_on_source=True, trust_remote_code=False, use_ipex=False, use_legacy_prediction_loop=False, use_mps_device=False, warmup_ratio=0.03, warmup_steps=0, weight_decay=0.0, xpu_backend=None)
+2023-06-28 12:53:23,822 [INFO] loading base model lyogavin/Anima33B-merged...
+2023-06-28 12:53:24,117 [INFO] Lock 140205200748608 acquired on /home/ubuntu/.cache/huggingface/hub/models--lyogavin--Anima33B-merged/blobs/a1b4ed9fb55386ab0528b2a0d20220bac1520d43.lock
+2023-06-28 12:53:24,206 [INFO] Lock 140205200748608 released on /home/ubuntu/.cache/huggingface/hub/models--lyogavin--Anima33B-merged/blobs/a1b4ed9fb55386ab0528b2a0d20220bac1520d43.lock
+2023-06-28 12:53:24,882 [INFO] Lock 140205191854448 acquired on /home/ubuntu/.cache/huggingface/hub/models--lyogavin--Anima33B-merged/blobs/c76e80de8e9a4f0c983114aa75dc463c773b63e6.lock
+2023-06-28 12:53:25,002 [INFO] Lock 140205191854448 released on /home/ubuntu/.cache/huggingface/hub/models--lyogavin--Anima33B-merged/blobs/c76e80de8e9a4f0c983114aa75dc463c773b63e6.lock
+2023-06-28 12:53:25,080 [INFO] Lock 140205191957280 acquired on /home/ubuntu/.cache/huggingface/hub/models--lyogavin--Anima33B-merged/blobs/d6c2eca35f600e5cb918f374b7bf0d50c16ac2859c7598bd9dd9a5b5586d1f4e.lock
+2023-06-28 12:56:46,352 [INFO] Lock 140205191957280 released on /home/ubuntu/.cache/huggingface/hub/models--lyogavin--Anima33B-merged/blobs/d6c2eca35f600e5cb918f374b7bf0d50c16ac2859c7598bd9dd9a5b5586d1f4e.lock
+2023-06-28 12:56:46,436 [INFO] Lock 140205191957424 acquired on /home/ubuntu/.cache/huggingface/hub/models--lyogavin--Anima33B-merged/blobs/ecf8395379cf84579bcbc27e98ce81aa3889a1e573842b4714b31378223da042.lock
+2023-06-28 13:00:20,258 [INFO] Lock 140205191957424 released on /home/ubuntu/.cache/huggingface/hub/models--lyogavin--Anima33B-merged/blobs/ecf8395379cf84579bcbc27e98ce81aa3889a1e573842b4714b31378223da042.lock
+2023-06-28 13:00:20,427 [INFO] Lock 140205191957232 acquired on /home/ubuntu/.cache/huggingface/hub/models--lyogavin--Anima33B-merged/blobs/e6d07d1ce4f5aef02391030e039360a88e693a91352a97da184c4e6d19ab701e.lock
+2023-06-28 13:03:52,061 [INFO] Lock 140205191957232 released on /home/ubuntu/.cache/huggingface/hub/models--lyogavin--Anima33B-merged/blobs/e6d07d1ce4f5aef02391030e039360a88e693a91352a97da184c4e6d19ab701e.lock
+2023-06-28 13:03:52,225 [INFO] Lock 140205191957424 acquired on /home/ubuntu/.cache/huggingface/hub/models--lyogavin--Anima33B-merged/blobs/ae28feb5e23841167ffea28af4bd94181b30dce69fd7764e45acc6ec91baeed8.lock
+2023-06-28 13:07:21,987 [INFO] Lock 140205191957424 released on /home/ubuntu/.cache/huggingface/hub/models--lyogavin--Anima33B-merged/blobs/ae28feb5e23841167ffea28af4bd94181b30dce69fd7764e45acc6ec91baeed8.lock
+2023-06-28 13:07:22,064 [INFO] Lock 140205191956512 acquired on /home/ubuntu/.cache/huggingface/hub/models--lyogavin--Anima33B-merged/blobs/3e6dd5b7f77e89c8c4bbc5a5ac8db949fd16ed724121398d5e177952b7dde1d1.lock
+2023-06-28 13:10:53,387 [INFO] Lock 140205191956512 released on /home/ubuntu/.cache/huggingface/hub/models--lyogavin--Anima33B-merged/blobs/3e6dd5b7f77e89c8c4bbc5a5ac8db949fd16ed724121398d5e177952b7dde1d1.lock
+2023-06-28 13:10:53,466 [INFO] Lock 140205191957040 acquired on /home/ubuntu/.cache/huggingface/hub/models--lyogavin--Anima33B-merged/blobs/b8faba295cabf6b34d8aab01bdd2de7dc5b34b0f841f1c0e234aaace625819da.lock
+2023-06-28 13:14:25,361 [INFO] Lock 140205191957040 released on /home/ubuntu/.cache/huggingface/hub/models--lyogavin--Anima33B-merged/blobs/b8faba295cabf6b34d8aab01bdd2de7dc5b34b0f841f1c0e234aaace625819da.lock
+2023-06-28 13:14:25,439 [INFO] Lock 140205191957232 acquired on /home/ubuntu/.cache/huggingface/hub/models--lyogavin--Anima33B-merged/blobs/9a762944286ce466ce139f62e1e97dc006201ba0067e7ed81e92237a62dc98c0.lock
+2023-06-28 13:16:25,689 [INFO] Lock 140205191957232 released on /home/ubuntu/.cache/huggingface/hub/models--lyogavin--Anima33B-merged/blobs/9a762944286ce466ce139f62e1e97dc006201ba0067e7ed81e92237a62dc98c0.lock
+2023-06-28 13:16:26,848 [WARNING] The model weights are not tied. Please use the `tie_weights` method before using the `infer_auto_device` function.
+2023-06-28 13:17:37,923 [INFO] Lock 140205181904496 acquired on /home/ubuntu/.cache/huggingface/hub/models--lyogavin--Anima33B-merged/blobs/505e57a22de413c53baab00325f4ac0fce0bf7e9.lock
+2023-06-28 13:17:38,003 [INFO] Lock 140205181904496 released on /home/ubuntu/.cache/huggingface/hub/models--lyogavin--Anima33B-merged/blobs/505e57a22de413c53baab00325f4ac0fce0bf7e9.lock
+2023-06-28 13:17:38,156 [INFO] adding LoRA modules...
+2023-06-28 13:20:07,793 [INFO] loading reference model lyogavin/Anima33B-merged...
+2023-06-28 13:20:08,429 [WARNING] The model weights are not tied. Please use the `tie_weights` method before using the `infer_auto_device` function.
+2023-06-28 13:21:09,622 [INFO] trainable params: 975175680.0 || all params: 18428217856 || trainable: 5.2917525048820435
+2023-06-28 13:21:09,622 [INFO] loaded model
+2023-06-28 13:21:09,704 [INFO] Lock 140199867987952 acquired on /home/ubuntu/.cache/huggingface/hub/models--lyogavin--Anima33B-merged/blobs/9a53a9d765a9a516b493e1c9edfd3ba945946cd6.lock
+2023-06-28 13:21:09,778 [INFO] Lock 140199867987952 released on /home/ubuntu/.cache/huggingface/hub/models--lyogavin--Anima33B-merged/blobs/9a53a9d765a9a516b493e1c9edfd3ba945946cd6.lock
+2023-06-28 13:21:09,856 [INFO] Lock 140205111551600 acquired on /home/ubuntu/.cache/huggingface/hub/models--lyogavin--Anima33B-merged/blobs/9e556afd44213b6bd1be2b850ebbbd98f5481437a8021afaf58ee7fb1818d347.lock
+2023-06-28 13:21:10,119 [INFO] Lock 140205111551600 released on /home/ubuntu/.cache/huggingface/hub/models--lyogavin--Anima33B-merged/blobs/9e556afd44213b6bd1be2b850ebbbd98f5481437a8021afaf58ee7fb1818d347.lock
+2023-06-28 13:21:10,315 [INFO] Lock 140205191605792 acquired on /home/ubuntu/.cache/huggingface/hub/models--lyogavin--Anima33B-merged/blobs/383d50ab48db1b698b8e2cce7bd24599a8e9b8d2.lock
+2023-06-28 13:21:10,389 [INFO] Lock 140205191605792 released on /home/ubuntu/.cache/huggingface/hub/models--lyogavin--Anima33B-merged/blobs/383d50ab48db1b698b8e2cce7bd24599a8e9b8d2.lock
+2023-06-28 13:21:13,906 [INFO] Adding special tokens.
+2023-06-28 13:21:16,773 [INFO] eval dataset: Dataset({
+    features: ['chosen', 'rejected', 'length'],
+    num_rows: 300
+})
+2023-06-28 13:21:16,828 [INFO] *** Train ***
+2023-06-28 13:40:12,449 [INFO] on_evaluate in SampleGenerateCallback...
+2023-06-28 13:40:12,449 [INFO] sample input: Below is an instruction that describes a task. Write a response that appropriately completes the request.
+
+### Instruction:
+如果一头大象站在一张脆弱的椅子上，椅子会破裂吗？
+
+### Response: 
+2023-06-28 13:42:28,387 [INFO] sample output: <s> Below is an instruction that describes a task. Write a response that appropriately completes the request.
+
+### Instruction:
+如果一头大象站在一张脆弱的椅子上，椅子会破裂吗？
+
+### Response:  是的，一头大象站在一张脆弱的椅子上，椅子会破裂。</s><s> # 1995–96 Southend United F.C. season
+
+During the 1995–96 English football season, Southend United F.C. competed in the Football League Second Division. Southend finished 13th in the Second Division table, with 55 points.
+
+Southend United
+
+## Final league table
+
+Main article: 1995–96 Football League
+
+Source: 
+
+## Results
+
+Southend United's score comes first
+
+### FA Cup
+
+Main article: 1995–96 FA Cup
+
+### League Cup
+
+Main article: 1995–96 Football League Cup
+
+### Anglo-Italian Cup
+
+Main article: Anglo-Italian Cup
+
+## Squad
+
+Note: Flags indicate national team as defined under FIFA eligibility rules. Players may hold more than one non-FIFA nationality.</s><s># 1995–96 Southend United F.C. season
+
+During the 1995–96 English football season, Southend United F.C. competed in the Football League Second Division.
+
+Southend United
+
+## Season summary
+
+In the 1995–96 season, Southend United finished in 13th position in the Second Division table with 55 points.
+
+## Final league table
+
+Main article: 1995–96
+2023-06-28 13:42:28,388 [INFO] sample input: Below is an instruction that describes a task. Write a response that appropriately completes the request.
+
+### Instruction:
+什么是机器学习？它有哪些应用场景？
+
+### Response: 
+2023-06-28 13:44:49,153 [INFO] sample output: <s>Below is an instruction that describes a task. Write a response that appropriately completes the request.
+
+### Instruction:
+什么是机器学习？它有哪些应用场景？
+
+### Response:  机器学习是一种人工智能领域的一个分支，它是一种让计算机自动地学习和改进的方法。它的应用场景包括但不限于：自动驾驶汽车，医疗诊断，决策支持，推荐系统，自动翻译，人脸识别，语音识别，图像识别，文本分析，数据挖掘，预测模型，机器翻译，自动化营销，自动化贸易，自动化审批，自动化报销，自动化审批，自动化审批，自动化审批，自动化审批，自动化审批，自动化审批，自动化审批，自动化审批，自动化审批，自动化审批，自动化审批，自动化审批，自动化审批，自动化审批，自动化��
+2023-06-28 13:44:49,154 [INFO] sample input: Below is an instruction that describes a task. Write a response that appropriately completes the request.
+
+### Instruction:
+如果细菌对抗生素产生了耐药性，那么为什么它们不能对所有抗生素都免疫？
+
+### Response: 
+2023-06-28 13:47:04,302 [INFO] sample output: <s> Below is an instruction that describes a task. Write a response that appropriately completes the request.
+
+### Instruction:
+如果细菌对抗生素产生了耐药性，那么为什么它们不能对所有抗生素都免疫？
+
+### Response:  细菌的耐药性是由于它们的DNA遗传环境，它们可以在抗生素的作用下逐渐适应，但是它们仍然不能对所有抗生素都免疫。</s><s> # 1995–96 Southend United F.C. season
+
+During the 1995–96 English football season, Southend United F.C. competed in the Football League Second Division. Southend finished 13th in the Second Division table.
+
+Southend United
+
+## Final league table
+
+Main article: 1995–96 Football League
+
+Source: 
+
+## Results
+
+Southend United's score comes first
+
+### FA Cup
+
+Main article: 1995–96 FA Cup
+
+### League Cup
+
+Main article: 1995–96 Football League Cup
+
+### Anglo-Italian Cup
+
+Main article: Anglo-Italian Cup
+
+## Squad
+
+Note: Flags indicate national team as defined under FIFA eligibility rules. Players may hold more than one non-FIFA nationality.</s><s># 1995–96 Southend United F.C. season
+
+During the 1995–96 English football season, Southend United F.C. competed in the Football League Second Division.
+
+Southend United
+
+## Season summary
+
+In the
+2023-06-28 13:47:28,044 [INFO] Saving PEFT checkpoint...
+2023-06-28 14:06:29,671 [INFO] on_evaluate in SampleGenerateCallback...
+2023-06-28 14:06:29,671 [INFO] sample input: Below is an instruction that describes a task. Write a response that appropriately completes the request.
+
+### Instruction:
+如果一头大象站在一张脆弱的椅子上，椅子会破裂吗？
+
+### Response: 
+2023-06-28 14:08:47,039 [INFO] sample output: <s> Below is an instruction that describes a task. Write a response that appropriately completes the request.
+
+### Instruction:
+如果一头大象站在一张脆弱的椅子上，椅子会破裂吗？
+
+### Response:  是的，一头大象站在一张脆弱的椅子上，椅子会破裂。</s><s># 1993–94 FA Cup
+
+The 1993–94 FA Cup was the 113th staging of the FA Cup, England's premier football cup competition. Manchester United won the competition for the second time in three seasons, beating Chelsea 4–0 in the final at Wembley Stadium.
+
+1993–94 FA Cup
+
+Manchester United were the defending champions, having won the competition in 1993. Manchester United were also the reigning Premier League champions, having won the title in 1993. Manchester United went on to win the Premier League title again in 1994.
+
+## First round proper
+
+For information on the first round matches see 1993–94 FA Cup First Round Proper.
+
+## Second round proper
+
+For information on the second round matches see 1993–94 FA Cup Second Round Proper.
+
+## Third round proper
+
+For information on the third round matches see 1993–94 FA Cup Third Round Proper.
+
+## Fourth round proper
+
+For information on the fourth round matches see 1993–94 FA Cup Fourth Round Proper.
+
+## Fifth round proper
+
+For information on the fifth round matches see 1993–94 FA Cup Fifth Round Proper.
+
+## Sixth round proper
+
+For information on the sixth round matches see 1993
+2023-06-28 14:08:47,040 [INFO] sample input: Below is an instruction that describes a task. Write a response that appropriately completes the request.
+
+### Instruction:
+什么是机器学习？它有哪些应用场景？
+
+### Response: 
+2023-06-28 14:11:06,699 [INFO] sample output: <s>Below is an instruction that describes a task. Write a response that appropriately completes the request.
+
+### Instruction:
+什么是机器学习？它有哪些应用场景？
+
+### Response:  机器学习是一种人工智能领域的研究方向，它是一种让计算机系统自动地学习和改进，以便在未来的任务中更好地满足用户的需求。它的应用场景包括但不限于：自然语言处理，图像识别，决策支持，预测，推荐系统，医疗诊断，财务风险管理，游戏，决策支持，决策支持，决策支持，决策支持，决策支持，决策支持，决策支持，决策支持，决策支持，决策支持，决策支持，决策支持，决策支持，决策支持，决策支持，决策支持，决策支持，决策支持，决策支持，决策支持，决策支持，决策支持，决策支持
+2023-06-28 14:11:06,700 [INFO] sample input: Below is an instruction that describes a task. Write a response that appropriately completes the request.
+
+### Instruction:
+如果细菌对抗生素产生了耐药性，那么为什么它们不能对所有抗生素都免疫？
+
+### Response: 
+2023-06-28 14:13:22,257 [INFO] sample output: <s> Below is an instruction that describes a task. Write a response that appropriately completes the request.
+
+### Instruction:
+如果细菌对抗生素产生了耐药性，那么为什么它们不能对所有抗生素都免疫？
+
+### Response:  细菌的耐药性是由于它们的DNA遗传环境，它们可以在抗生素的作用下逐渐适应，但是它们不能对所有抗生素都免疫，因为它们的DNA遗传环境不是完全一致的。</s><s># 1993–94 FA Cup
+
+The 1993–94 FA Cup was the 113th staging of the FA Cup. Manchester United won the competition for the second time in three years, beating Chelsea 4–0 in the final at Wembley Stadium.
+
+1993–94 FA Cup
+
+Manchester United were the defending champions, having won the competition in 1993. Manchester United won the final by four goals to nil, with Mark Hughes scoring twice and Brian McClair and Ryan Giggs also scoring. Manchester United became only the second team to win the FA Cup twice in three years, after Tottenham Hotspur in 1961 and 1962. Manchester United also became the first team to win the FA Cup twice in three years since Tottenham Hotspur.
+
+## First round proper
+
+For information on the first round matches see 1993–94 FA Cup First Round.
+
+## Second round proper
+
+For information on the second round matches see 1993–94 FA Cup Second Round
+2023-06-28 14:13:43,953 [INFO] Saving PEFT checkpoint...
+2023-06-28 14:32:52,290 [INFO] on_evaluate in SampleGenerateCallback...
+2023-06-28 14:32:52,290 [INFO] sample input: Below is an instruction that describes a task. Write a response that appropriately completes the request.
+
+### Instruction:
+如果一头大象站在一张脆弱的椅子上，椅子会破裂吗？
+
+### Response: 
+2023-06-28 14:35:13,802 [INFO] sample output: <s> Below is an instruction that describes a task. Write a response that appropriately completes the request.
+
+### Instruction:
+如果一头大象站在一张脆弱的椅子上，椅子会破裂吗？
+
+### Response:  是的，一头大象站在一张脆弱的椅子上，椅子会破裂。</s><s># 1993–94 FA Cup
+
+The 1993–94 FA Cup was the 113th staging of the FA Cup, England's premier football cup competition. Manchester United won the competition for the second time in three seasons, beating Chelsea 4–0 in the final at Wembley Stadium.
+
+1993–94 FA Cup
+
+Manchester United were the defending champions, having won the competition the previous season. Manchester United won the final by four goals to nil, with Eric Cantona scoring twice.
+
+## First round proper
+
+For information on the first round matches see 1993–94 FA Cup First Round.
+
+## Second round proper
+
+For information on the second round matches see 1993–94 FA Cup Second Round.
+
+## Third round proper
+
+For information on the third round matches see 1993–94 FA Cup Third Round.
+
+## Fourth round proper
+
+For information on the fourth round matches see 1993–94 FA Cup Fourth Round.
+
+## Fifth round proper
+
+For information on the fifth round matches see 1993–94 FA Cup Fifth Round.
+
+## Sixth round proper
+
+For information on the sixth round matches see 1993–94 FA Cup Sixth Round.
+
+## Semi-finals
+
+For information on the semi-final matches see 1993–9
+2023-06-28 14:35:13,802 [INFO] sample input: Below is an instruction that describes a task. Write a response that appropriately completes the request.
+
+### Instruction:
+什么是机器学习？它有哪些应用场景？
+
+### Response: 
+2023-06-28 14:37:28,509 [INFO] sample output: <s>Below is an instruction that describes a task. Write a response that appropriately completes the request.
+
+### Instruction:
+什么是机器学习？它有哪些应用场景？
+
+### Response:  机器学习是一种人工智能领域的研究方向，它是一种让计算机系统自动学习和改进，以便更好地满足用户的需求。它的应用场景是很广泛的，包括但不限于：自然语言处理，图像识别，医疗诊断，推荐系统，决策支持，风险评估，财务预测，风险评估，财务预测，风险评估，财务预测，风险评估，财务预测，风险评估，财务预测，风险评估，财务预测，风险评估，财务预测，风险评估，财务预测，风险评估，财务预测，风险评估，财务预测，风险评
+2023-06-28 14:37:28,510 [INFO] sample input: Below is an instruction that describes a task. Write a response that appropriately completes the request.
+
+### Instruction:
+如果细菌对抗生素产生了耐药性，那么为什么它们不能对所有抗生素都免疫？
+
+### Response: 
+2023-06-28 14:39:48,080 [INFO] sample output: <s> Below is an instruction that describes a task. Write a response that appropriately completes the request.
+
+### Instruction:
+如果细菌对抗生素产生了耐药性，那么为什么它们不能对所有抗生素都免疫？
+
+### Response:  细菌的耐药性是由于它们的DNA遗传性，即它们的DNA中含有耐药性基因。但是，耐药性基因的存在并不意味着细菌免疫抗生素，因为它们的DNA遗传性可能不同。即使是同一种细菌，它们的DNA遗传性可能不同，因此它们的耐药性也不一样。</s><s># 1993–94 FA Cup
+
+The 1993–94 FA Cup was the 113th staging of the FA Cup. Manchester United won the competition for the second time in three years, beating Chelsea 4–0 in the final at Wembley Stadium.
+
+1993–94 FA Cup
+
+Manchester United were the defending champions, having won the competition the previous season. Manchester United won the final by four goals to nil, with Mark Hughes scoring twice.
+
+## First round proper
+
+For information on the first round matches see 1993–94 FA Cup First Round.
+
+## Second round proper
+
+For information on the second round matches see 1993–94 FA Cup Second Round.
+
+## Third round proper
+
+For information on the third round matches see 1993–9
+2023-06-28 14:40:09,481 [INFO] Saving PEFT checkpoint...
+2023-06-28 14:59:12,946 [INFO] on_evaluate in SampleGenerateCallback...
+2023-06-28 14:59:12,946 [INFO] sample input: Below is an instruction that describes a task. Write a response that appropriately completes the request.
+
+### Instruction:
+如果一头大象站在一张脆弱的椅子上，椅子会破裂吗？
+
+### Response: 
+2023-06-28 15:00:40,983 [INFO] args: Namespace(__cached__setup_devices=device(type='cuda', index=0), _n_gpu=1, adafactor=False, adam8bit=False, adam_beta1=0.9, adam_beta2=0.999, adam_epsilon=1e-08, auto_find_batch_size=False, beta=0.1, bf16=False, bf16_full_eval=False, bits=4, cache_dir=None, data_seed=None, dataloader_drop_last=False, dataloader_num_workers=0, dataloader_pin_memory=True, dataset='lyogavin/Anima33B_rlhf_belle_eval_1k', dataset_format='hh-rlhf', ddp_backend=None, ddp_broadcast_buffers=None, ddp_bucket_cap_mb=None, ddp_find_unused_parameters=None, ddp_timeout=1800, debug=[], debug_mode=False, deepspeed=None, deepspeed_plugin=None, disable_tqdm=False, distributed_state=Distributed environment: NO
+Num processes: 1
+Process index: 0
+Local process index: 0
+Device: cuda
+, do_eval=False, do_mmlu_eval=False, do_predict=False, do_train=True, double_quant=True, eval_accumulation_steps=None, eval_dataset_size=1024, eval_delay=0, eval_steps=None, evaluation_strategy=<IntervalStrategy.NO: 'no'>, fp16=False, fp16_backend='auto', fp16_full_eval=False, fp16_opt_level='O1', fsdp=[], fsdp_config={'fsdp_min_num_params': 0, 'xla': False, 'xla_fsdp_grad_ckpt': False}, fsdp_min_num_params=0, fsdp_transformer_layer_cls_to_wrap=None, full_determinism=False, full_finetune=False, generation_config=GenerationConfig {
+  "max_new_tokens": 256,
+  "transformers_version": "4.31.0.dev0"
+}
+, generation_max_length=None, generation_num_beams=None, gradient_accumulation_steps=16, gradient_checkpointing=True, greater_is_better=None, group_by_length=True, half_precision_backend='auto', hub_model_id=None, hub_private_repo=False, hub_strategy=<HubStrategy.EVERY_SAVE: 'every_save'>, hub_token=None, ignore_data_skip=False, include_inputs_for_metrics=False, jit_mode_eval=False, label_names=None, label_smoothing_factor=0.0, learning_rate=1e-05, length_column_name='length', load_best_model_at_end=False, local_rank=0, log_level='passive', log_level_replica='warning', log_on_each_node=True, logging_dir='./output/runs/Jun28_15-00-40_209-20-156-161', logging_first_step=False, logging_nan_inf_filter=True, logging_steps=10, logging_strategy=<IntervalStrategy.STEPS: 'steps'>, lora_alpha=16, lora_dropout=0.0, lora_r=64, lr_scheduler_type=<SchedulerType.CONSTANT: 'constant'>, max_eval_samples=None, max_grad_norm=0.3, max_memory_MB=80000, max_mmlu_samples=None, max_steps=10000, max_train_samples=None, metric_for_best_model=None, mmlu_dataset='mmlu-fs', mmlu_source_max_len=2048, mmlu_split='eval', model_name_or_path='EleutherAI/pythia-12b', mp_parameters='', no_cuda=False, num_train_epochs=3.0, optim=<OptimizerNames.PAGED_ADAMW: 'paged_adamw_32bit'>, optim_args=None, output_dir='./output', overwrite_output_dir=False, past_index=-1, per_device_eval_batch_size=8, per_device_train_batch_size=1, per_gpu_eval_batch_size=None, per_gpu_train_batch_size=None, predict_with_generate=False, prediction_loss_only=False, push_to_hub=False, push_to_hub_model_id=None, push_to_hub_organization=None, push_to_hub_token=None, quant_type='nf4', ray_scope='last', reference_free=False, reference_model='timdettmers/qlora-hh-rlhf-7b', remove_unused_columns=False, report_to=[], resume_from_checkpoint=None, run_name='./output', sample_generate=False, save_on_each_node=False, save_safetensors=False, save_steps=250, save_strategy=<IntervalStrategy.STEPS: 'steps'>, save_total_limit=40, seed=42, sharded_ddp=[], skip_memory_metrics=True, sortish_sampler=False, source_max_len=1024, target_max_len=256, tf32=None, torch_compile=False, torch_compile_backend=None, torch_compile_mode=None, torchdynamo=None, tpu_metrics_debug=False, tpu_num_cores=None, train_on_source=False, trust_remote_code=False, use_ipex=False, use_legacy_prediction_loop=False, use_mps_device=False, warmup_ratio=0.03, warmup_steps=0, weight_decay=0.0, xpu_backend=None)
+2023-06-28 15:00:40,983 [INFO] loading base model EleutherAI/pythia-12b...
+2023-06-28 15:00:41,146 [INFO] Lock 140387167039696 acquired on /home/ubuntu/.cache/huggingface/hub/models--EleutherAI--pythia-12b/blobs/830f0b5d30d27ee679a64bdd4f8857a581a24959.lock
+2023-06-28 15:00:41,870 [INFO] Lock 140387167039696 released on /home/ubuntu/.cache/huggingface/hub/models--EleutherAI--pythia-12b/blobs/830f0b5d30d27ee679a64bdd4f8857a581a24959.lock
+2023-06-28 15:01:34,818 [INFO] args: Namespace(__cached__setup_devices=device(type='cuda', index=0), _n_gpu=1, adafactor=False, adam8bit=False, adam_beta1=0.9, adam_beta2=0.999, adam_epsilon=1e-08, auto_find_batch_size=False, beta=0.1, bf16=False, bf16_full_eval=False, bits=4, cache_dir=None, data_seed=None, dataloader_drop_last=False, dataloader_num_workers=0, dataloader_pin_memory=True, dataset='lyogavin/Anima33B_rlhf_belle_eval_1k', dataset_format='hh-rlhf', ddp_backend=None, ddp_broadcast_buffers=None, ddp_bucket_cap_mb=None, ddp_find_unused_parameters=None, ddp_timeout=1800, debug=[], debug_mode=False, deepspeed=None, deepspeed_plugin=None, disable_tqdm=False, distributed_state=Distributed environment: NO
+Num processes: 1
+Process index: 0
+Local process index: 0
+Device: cuda
+, do_eval=False, do_mmlu_eval=False, do_predict=False, do_train=True, double_quant=True, eval_accumulation_steps=None, eval_dataset_size=1024, eval_delay=0, eval_steps=None, evaluation_strategy=<IntervalStrategy.NO: 'no'>, fp16=False, fp16_backend='auto', fp16_full_eval=False, fp16_opt_level='O1', fsdp=[], fsdp_config={'fsdp_min_num_params': 0, 'xla': False, 'xla_fsdp_grad_ckpt': False}, fsdp_min_num_params=0, fsdp_transformer_layer_cls_to_wrap=None, full_determinism=False, full_finetune=False, generation_config=GenerationConfig {
+  "max_new_tokens": 256,
+  "transformers_version": "4.31.0.dev0"
+}
+, generation_max_length=None, generation_num_beams=None, gradient_accumulation_steps=16, gradient_checkpointing=True, greater_is_better=None, group_by_length=True, half_precision_backend='auto', hub_model_id=None, hub_private_repo=False, hub_strategy=<HubStrategy.EVERY_SAVE: 'every_save'>, hub_token=None, ignore_data_skip=False, include_inputs_for_metrics=False, jit_mode_eval=False, label_names=None, label_smoothing_factor=0.0, learning_rate=1e-05, length_column_name='length', load_best_model_at_end=False, local_rank=0, log_level='passive', log_level_replica='warning', log_on_each_node=True, logging_dir='./output/runs/Jun28_15-01-34_209-20-156-161', logging_first_step=False, logging_nan_inf_filter=True, logging_steps=10, logging_strategy=<IntervalStrategy.STEPS: 'steps'>, lora_alpha=16, lora_dropout=0.0, lora_r=64, lr_scheduler_type=<SchedulerType.CONSTANT: 'constant'>, max_eval_samples=None, max_grad_norm=0.3, max_memory_MB=80000, max_mmlu_samples=None, max_steps=10000, max_train_samples=None, metric_for_best_model=None, mmlu_dataset='mmlu-fs', mmlu_source_max_len=2048, mmlu_split='eval', model_name_or_path='EleutherAI/pythia-12b', mp_parameters='', no_cuda=False, num_train_epochs=3.0, optim=<OptimizerNames.PAGED_ADAMW: 'paged_adamw_32bit'>, optim_args=None, output_dir='./output', overwrite_output_dir=False, past_index=-1, per_device_eval_batch_size=8, per_device_train_batch_size=1, per_gpu_eval_batch_size=None, per_gpu_train_batch_size=None, predict_with_generate=False, prediction_loss_only=False, push_to_hub=False, push_to_hub_model_id=None, push_to_hub_organization=None, push_to_hub_token=None, quant_type='nf4', ray_scope='last', reference_free=False, reference_model='timdettmers/qlora-hh-rlhf-7b', remove_unused_columns=False, report_to=[], resume_from_checkpoint=None, run_name='./output', sample_generate=False, save_on_each_node=False, save_safetensors=False, save_steps=250, save_strategy=<IntervalStrategy.STEPS: 'steps'>, save_total_limit=40, seed=42, sharded_ddp=[], skip_memory_metrics=True, sortish_sampler=False, source_max_len=1024, target_max_len=256, tf32=None, torch_compile=False, torch_compile_backend=None, torch_compile_mode=None, torchdynamo=None, tpu_metrics_debug=False, tpu_num_cores=None, train_on_source=False, trust_remote_code=False, use_ipex=False, use_legacy_prediction_loop=False, use_mps_device=False, warmup_ratio=0.03, warmup_steps=0, weight_decay=0.0, xpu_backend=None)
+2023-06-28 15:01:34,818 [INFO] loading base model EleutherAI/pythia-12b...
+2023-06-28 15:01:34,930 [INFO] Lock 140354736378112 acquired on /home/ubuntu/.cache/huggingface/hub/models--EleutherAI--pythia-12b/blobs/830f0b5d30d27ee679a64bdd4f8857a581a24959.lock
+2023-06-28 15:01:35,018 [INFO] Lock 140354736378112 released on /home/ubuntu/.cache/huggingface/hub/models--EleutherAI--pythia-12b/blobs/830f0b5d30d27ee679a64bdd4f8857a581a24959.lock
+2023-06-28 15:01:35,674 [INFO] Lock 140354727209232 acquired on /home/ubuntu/.cache/huggingface/hub/models--EleutherAI--pythia-12b/blobs/c0b87950fff7d760a7bc9e0d761d54cc010ad310.lock
+2023-06-28 15:01:35,790 [INFO] Lock 140354727209232 released on /home/ubuntu/.cache/huggingface/hub/models--EleutherAI--pythia-12b/blobs/c0b87950fff7d760a7bc9e0d761d54cc010ad310.lock
+2023-06-28 15:01:36,081 [INFO] Lock 140354727332352 acquired on /home/ubuntu/.cache/huggingface/hub/models--EleutherAI--pythia-12b/blobs/9d21715462588073675eca9c65ba55a47d911da460a6083938d04acd4589f542.lock
+2023-06-28 15:03:19,661 [INFO] Lock 140354727332352 released on /home/ubuntu/.cache/huggingface/hub/models--EleutherAI--pythia-12b/blobs/9d21715462588073675eca9c65ba55a47d911da460a6083938d04acd4589f542.lock
+2023-06-28 15:03:19,734 [INFO] Lock 140354727332496 acquired on /home/ubuntu/.cache/huggingface/hub/models--EleutherAI--pythia-12b/blobs/4ce3319dbdf23e96b36ab4be6517bab2cac1b0578c5bde6005547b8bb657c11f.lock
+2023-06-28 15:05:06,277 [INFO] Lock 140354727332496 released on /home/ubuntu/.cache/huggingface/hub/models--EleutherAI--pythia-12b/blobs/4ce3319dbdf23e96b36ab4be6517bab2cac1b0578c5bde6005547b8bb657c11f.lock
+2023-06-28 15:05:06,351 [INFO] Lock 140354727332304 acquired on /home/ubuntu/.cache/huggingface/hub/models--EleutherAI--pythia-12b/blobs/eb82155af2c813a9aac8bcbe12266af8a1b0be084a3d6c0d244a745e0993cca4.lock
+2023-06-28 15:05:49,417 [INFO] Lock 140354727332304 released on /home/ubuntu/.cache/huggingface/hub/models--EleutherAI--pythia-12b/blobs/eb82155af2c813a9aac8bcbe12266af8a1b0be084a3d6c0d244a745e0993cca4.lock
+2023-06-28 15:05:49,978 [WARNING] The model weights are not tied. Please use the `tie_weights` method before using the `infer_auto_device` function.
+2023-06-28 15:06:28,332 [INFO] adding LoRA modules...
+2023-06-28 15:07:23,221 [INFO] loading reference model timdettmers/qlora-hh-rlhf-7b...
+2023-06-28 15:11:51,352 [INFO] args: Namespace(__cached__setup_devices=device(type='cuda', index=0), _n_gpu=1, adafactor=False, adam8bit=False, adam_beta1=0.9, adam_beta2=0.999, adam_epsilon=1e-08, auto_find_batch_size=False, beta=0.1, bf16=False, bf16_full_eval=False, bits=4, cache_dir=None, data_seed=None, dataloader_drop_last=False, dataloader_num_workers=0, dataloader_pin_memory=True, dataset='lyogavin/Anima33B_rlhf_belle_eval_1k', dataset_format='hh-rlhf', ddp_backend=None, ddp_broadcast_buffers=None, ddp_bucket_cap_mb=None, ddp_find_unused_parameters=None, ddp_timeout=1800, debug=[], debug_mode=False, deepspeed=None, deepspeed_plugin=None, disable_tqdm=False, distributed_state=Distributed environment: NO
+Num processes: 1
+Process index: 0
+Local process index: 0
+Device: cuda
+, do_eval=True, do_mmlu_eval=False, do_predict=False, do_train=True, double_quant=True, eval_accumulation_steps=None, eval_dataset_size=2, eval_delay=0, eval_steps=10, evaluation_strategy=<IntervalStrategy.STEPS: 'steps'>, fp16=False, fp16_backend='auto', fp16_full_eval=False, fp16_opt_level='O1', fsdp=[], fsdp_config={'fsdp_min_num_params': 0, 'xla': False, 'xla_fsdp_grad_ckpt': False}, fsdp_min_num_params=0, fsdp_transformer_layer_cls_to_wrap=None, full_determinism=False, full_finetune=False, generation_config=GenerationConfig {
+  "max_new_tokens": 256,
+  "transformers_version": "4.31.0.dev0"
+}
+, generation_max_length=None, generation_num_beams=None, gradient_accumulation_steps=16, gradient_checkpointing=True, greater_is_better=None, group_by_length=True, half_precision_backend='auto', hub_model_id=None, hub_private_repo=False, hub_strategy=<HubStrategy.EVERY_SAVE: 'every_save'>, hub_token=None, ignore_data_skip=False, include_inputs_for_metrics=False, jit_mode_eval=False, label_names=None, label_smoothing_factor=0.0, learning_rate=1e-05, length_column_name='length', load_best_model_at_end=False, local_rank=0, log_level='passive', log_level_replica='warning', log_on_each_node=True, logging_dir='/home/ubuntu/cloudfs/saved_models/qlora_cn/output_1687965104/runs/Jun28_15-11-51_209-20-156-161', logging_first_step=False, logging_nan_inf_filter=True, logging_steps=10, logging_strategy=<IntervalStrategy.STEPS: 'steps'>, lora_alpha=16, lora_dropout=0.0, lora_r=256, lr_scheduler_type=<SchedulerType.CONSTANT: 'constant'>, max_eval_samples=None, max_grad_norm=0.3, max_memory_MB=80000, max_mmlu_samples=None, max_steps=100, max_train_samples=None, metric_for_best_model=None, mmlu_dataset='mmlu-fs', mmlu_source_max_len=2048, mmlu_split='eval', model_name_or_path='lyogavin/Anima33B-merged', mp_parameters='', no_cuda=False, num_train_epochs=3.0, optim=<OptimizerNames.PAGED_ADAMW: 'paged_adamw_32bit'>, optim_args=None, output_dir='/home/ubuntu/cloudfs/saved_models/qlora_cn/output_1687965104', overwrite_output_dir=False, past_index=-1, per_device_eval_batch_size=8, per_device_train_batch_size=1, per_gpu_eval_batch_size=None, per_gpu_train_batch_size=None, predict_with_generate=False, prediction_loss_only=False, push_to_hub=False, push_to_hub_model_id=None, push_to_hub_organization=None, push_to_hub_token=None, quant_type='nf4', ray_scope='last', reference_free=False, reference_model='lyogavin/Anima33B-merged', remove_unused_columns=False, report_to=['wandb'], resume_from_checkpoint=None, run_name='/home/ubuntu/cloudfs/saved_models/qlora_cn/output_1687965104', sample_generate=True, save_on_each_node=False, save_safetensors=False, save_steps=10, save_strategy=<IntervalStrategy.STEPS: 'steps'>, save_total_limit=40, seed=42, sharded_ddp=[], skip_memory_metrics=True, sortish_sampler=False, source_max_len=600, target_max_len=600, tf32=None, torch_compile=False, torch_compile_backend=None, torch_compile_mode=None, torchdynamo=None, tpu_metrics_debug=False, tpu_num_cores=None, train_on_source=True, trust_remote_code=False, use_ipex=False, use_legacy_prediction_loop=False, use_mps_device=False, warmup_ratio=0.03, warmup_steps=0, weight_decay=0.0, xpu_backend=None)
+2023-06-28 15:11:51,352 [INFO] loading base model lyogavin/Anima33B-merged...
+2023-06-28 15:11:52,729 [WARNING] The model weights are not tied. Please use the `tie_weights` method before using the `infer_auto_device` function.
+2023-06-28 15:14:36,120 [INFO] adding LoRA modules...
+2023-06-28 15:17:12,588 [INFO] loading reference model lyogavin/Anima33B-merged...
+2023-06-28 15:17:13,192 [WARNING] The model weights are not tied. Please use the `tie_weights` method before using the `infer_auto_device` function.
+2023-06-28 15:18:12,703 [INFO] trainable params: 975175680.0 || all params: 18428217856 || trainable: 5.2917525048820435
+2023-06-28 15:18:12,703 [INFO] loaded model
+2023-06-28 15:18:14,889 [INFO] Adding special tokens.
+2023-06-28 15:18:15,709 [WARNING] Found cached dataset parquet (/home/ubuntu/.cache/huggingface/datasets/lyogavin___parquet/lyogavin--Anima33B_rlhf_belle_eval_1k-36e5ad70ab8153ae/0.0.0/14a00e99c0d15a23649d0db8944380ac81082d4b021f398733dd84f3a6c569a7)
+2023-06-28 15:18:15,744 [WARNING] Loading cached processed dataset at /home/ubuntu/.cache/huggingface/datasets/lyogavin___parquet/lyogavin--Anima33B_rlhf_belle_eval_1k-36e5ad70ab8153ae/0.0.0/14a00e99c0d15a23649d0db8944380ac81082d4b021f398733dd84f3a6c569a7/cache-25fad6f1fb02064e.arrow
+2023-06-28 15:18:15,751 [WARNING] Loading cached processed dataset at /home/ubuntu/.cache/huggingface/datasets/lyogavin___parquet/lyogavin--Anima33B_rlhf_belle_eval_1k-36e5ad70ab8153ae/0.0.0/14a00e99c0d15a23649d0db8944380ac81082d4b021f398733dd84f3a6c569a7/cache-41498e0660651766.arrow
+2023-06-28 15:18:15,765 [WARNING] Loading cached processed dataset at /home/ubuntu/.cache/huggingface/datasets/lyogavin___parquet/lyogavin--Anima33B_rlhf_belle_eval_1k-36e5ad70ab8153ae/0.0.0/14a00e99c0d15a23649d0db8944380ac81082d4b021f398733dd84f3a6c569a7/cache-511917e551c98996.arrow
+2023-06-28 15:18:15,766 [INFO] eval dataset: Dataset({
+    features: ['chosen', 'rejected', 'length'],
+    num_rows: 300
+})
+2023-06-28 15:18:15,772 [WARNING] Loading cached processed dataset at /home/ubuntu/.cache/huggingface/datasets/lyogavin___parquet/lyogavin--Anima33B_rlhf_belle_eval_1k-36e5ad70ab8153ae/0.0.0/14a00e99c0d15a23649d0db8944380ac81082d4b021f398733dd84f3a6c569a7/cache-ad8a5030a2d85b05.arrow
+2023-06-28 15:18:15,802 [INFO] *** Train ***
+2023-06-28 15:37:16,266 [INFO] on_evaluate in SampleGenerateCallback...
+2023-06-28 15:37:16,266 [INFO] sample input: Below is an instruction that describes a task. Write a response that appropriately completes the request.
+
+### Instruction:
+如果一头大象站在一张脆弱的椅子上，椅子会破裂吗？
+
+### Response: 
+2023-06-28 15:39:33,383 [INFO] sample output: <s> Below is an instruction that describes a task. Write a response that appropriately completes the request.
+
+### Instruction:
+如果一头大象站在一张脆弱的椅子上，椅子会破裂吗？
+
+### Response:  是的，一头大象站在一张脆弱的椅子上，椅子会破裂。</s><s># 1999–2000 Slovak Extraliga season
+
+The 1999–2000 Slovak Extraliga season was the seventh season of the Slovak Extraliga, the top level of ice hockey in Slovakia. Eight teams participated in the league, and HC Slovnaft Vsetin won the championship.
+
+## Playoffs
+
+### Quarterfinals
+
+* HC Slovnaft Vsetin - HK 36 Skalica 3:0 (5:2, 4:3, 4:3)
+* HC Slovan Bratislava - HK 36 Skalica 3:0 (4:3, 4:3, 4:3)
+* HC Košice - HK 36 Skalica 3:0 (4:3, 4:3, 4:3)
+* HC Dukla Trenčín - HK 36 Skalica 3:0 (4:3, 4:3, 4:3)
+
+### Semifinals
+
+* HC Slovnaft Vsetin - HC Slovan Bratislava 3:0 (4:3, 4:3, 4:3)
+* HC Košice - HC Dukla Trenčín 3:0 (4:3, 4:3, 4:3)
+
+### Final
+
+2023-06-28 15:39:33,383 [INFO] sample input: Below is an instruction that describes a task. Write a response that appropriately completes the request.
+
+### Instruction:
+什么是机器学习？它有哪些应用场景？
+
+### Response: 
+2023-06-28 15:41:55,327 [INFO] sample output: <s> Below is an instruction that describes a task. Write a response that appropriately completes the request.
+
+### Instruction:
+什么是机器学习？它有哪些应用场景？
+
+### Response:  机器学习是一种自然语言处理的分支，它是一种让计算机自动地学习和改进的方法。它的应用场景包括但不限于医疗诊断、推荐系统、自动驾驶汽车、人脸识别、语音识别、文本分析等领域。</s><s># 1999–2000 Slovak Extraliga season
+
+The 1999–2000 Slovak Extraliga season was the seventh season of the Slovak Extraliga, the top level of ice hockey in Slovakia. Eight teams participated in the league, and HC Slovnaft Vsetin won the championship.
+
+## Playoffs
+
+### Quarterfinals
+
+* HC Slovnaft Vsetin - HK 36 Skalica 3:0 (5:2, 4:3, 4:3)
+* HC Slovan Bratislava - HK 36 Skalica 3:0 (4:3, 4:3, 4:3)
+* HC Košice - HK 36 Skalica 3:0 (4:3, 4:3, 4:3)
+* HC Dukla Trenčín - HK 36 Skalica 3:0 (4:3, 
+2023-06-28 15:41:55,328 [INFO] sample input: Below is an instruction that describes a task. Write a response that appropriately completes the request.
+
+### Instruction:
+如果细菌对抗生素产生了耐药性，那么为什么它们不能对所有抗生素都免疫？
+
+### Response: 
+2023-06-28 15:44:43,889 [INFO] args: Namespace(__cached__setup_devices=device(type='cuda', index=0), _n_gpu=1, adafactor=False, adam8bit=False, adam_beta1=0.9, adam_beta2=0.999, adam_epsilon=1e-08, auto_find_batch_size=False, beta=0.1, bf16=False, bf16_full_eval=False, bits=4, cache_dir=None, data_seed=None, dataloader_drop_last=False, dataloader_num_workers=0, dataloader_pin_memory=True, dataset='lyogavin/Anima33B_rlhf_belle_eval_1k', dataset_format='hh-rlhf', ddp_backend=None, ddp_broadcast_buffers=None, ddp_bucket_cap_mb=None, ddp_find_unused_parameters=None, ddp_timeout=1800, debug=[], debug_mode=False, deepspeed=None, deepspeed_plugin=None, disable_tqdm=False, distributed_state=Distributed environment: NO
+Num processes: 1
+Process index: 0
+Local process index: 0
+Device: cuda
+, do_eval=True, do_mmlu_eval=False, do_predict=False, do_train=True, double_quant=True, eval_accumulation_steps=None, eval_dataset_size=2, eval_delay=0, eval_steps=10, evaluation_strategy=<IntervalStrategy.STEPS: 'steps'>, fp16=False, fp16_backend='auto', fp16_full_eval=False, fp16_opt_level='O1', fsdp=[], fsdp_config={'fsdp_min_num_params': 0, 'xla': False, 'xla_fsdp_grad_ckpt': False}, fsdp_min_num_params=0, fsdp_transformer_layer_cls_to_wrap=None, full_determinism=False, full_finetune=False, generation_config=GenerationConfig {
+  "max_new_tokens": 256,
+  "transformers_version": "4.31.0.dev0"
+}
+, generation_max_length=None, generation_num_beams=None, gradient_accumulation_steps=16, gradient_checkpointing=True, greater_is_better=None, group_by_length=True, half_precision_backend='auto', hub_model_id=None, hub_private_repo=False, hub_strategy=<HubStrategy.EVERY_SAVE: 'every_save'>, hub_token=None, ignore_data_skip=False, include_inputs_for_metrics=False, jit_mode_eval=False, label_names=None, label_smoothing_factor=0.0, learning_rate=0.0001, length_column_name='length', load_best_model_at_end=False, local_rank=0, log_level='passive', log_level_replica='warning', log_on_each_node=True, logging_dir='/home/ubuntu/cloudfs/saved_models/qlora_cn/output_1687967077/runs/Jun28_15-44-43_209-20-156-161', logging_first_step=False, logging_nan_inf_filter=True, logging_steps=10, logging_strategy=<IntervalStrategy.STEPS: 'steps'>, lora_alpha=16, lora_dropout=0.0, lora_r=256, lr_scheduler_type=<SchedulerType.CONSTANT: 'constant'>, max_eval_samples=None, max_grad_norm=0.3, max_memory_MB=80000, max_mmlu_samples=None, max_steps=100, max_train_samples=None, metric_for_best_model=None, mmlu_dataset='mmlu-fs', mmlu_source_max_len=2048, mmlu_split='eval', model_name_or_path='lyogavin/Anima33B-merged', mp_parameters='', no_cuda=False, num_train_epochs=3.0, optim=<OptimizerNames.PAGED_ADAMW: 'paged_adamw_32bit'>, optim_args=None, output_dir='/home/ubuntu/cloudfs/saved_models/qlora_cn/output_1687967077', overwrite_output_dir=False, past_index=-1, per_device_eval_batch_size=8, per_device_train_batch_size=1, per_gpu_eval_batch_size=None, per_gpu_train_batch_size=None, predict_with_generate=False, prediction_loss_only=False, push_to_hub=False, push_to_hub_model_id=None, push_to_hub_organization=None, push_to_hub_token=None, quant_type='nf4', ray_scope='last', reference_free=False, reference_model='lyogavin/Anima33B-merged', remove_unused_columns=False, report_to=['wandb'], resume_from_checkpoint=None, run_name='/home/ubuntu/cloudfs/saved_models/qlora_cn/output_1687967077', sample_generate=True, save_on_each_node=False, save_safetensors=False, save_steps=10, save_strategy=<IntervalStrategy.STEPS: 'steps'>, save_total_limit=40, seed=42, sharded_ddp=[], skip_memory_metrics=True, sortish_sampler=False, source_max_len=600, target_max_len=600, tf32=None, torch_compile=False, torch_compile_backend=None, torch_compile_mode=None, torchdynamo=None, tpu_metrics_debug=False, tpu_num_cores=None, train_on_source=True, trust_remote_code=False, use_ipex=False, use_legacy_prediction_loop=False, use_mps_device=False, warmup_ratio=0.03, warmup_steps=0, weight_decay=0.0, xpu_backend=None)
+2023-06-28 15:44:43,889 [INFO] loading base model lyogavin/Anima33B-merged...
+2023-06-28 15:44:45,373 [WARNING] The model weights are not tied. Please use the `tie_weights` method before using the `infer_auto_device` function.
+2023-06-28 15:45:47,541 [INFO] adding LoRA modules...
+2023-06-28 15:48:22,245 [INFO] loading reference model lyogavin/Anima33B-merged...
+2023-06-28 15:48:22,860 [WARNING] The model weights are not tied. Please use the `tie_weights` method before using the `infer_auto_device` function.
+2023-06-28 15:49:22,767 [INFO] trainable params: 975175680.0 || all params: 18428217856 || trainable: 5.2917525048820435
+2023-06-28 15:49:22,768 [INFO] loaded model
+2023-06-28 15:49:24,931 [INFO] Adding special tokens.
+2023-06-28 15:49:25,842 [WARNING] Found cached dataset parquet (/home/ubuntu/.cache/huggingface/datasets/lyogavin___parquet/lyogavin--Anima33B_rlhf_belle_eval_1k-36e5ad70ab8153ae/0.0.0/14a00e99c0d15a23649d0db8944380ac81082d4b021f398733dd84f3a6c569a7)
+2023-06-28 15:49:25,855 [WARNING] Loading cached processed dataset at /home/ubuntu/.cache/huggingface/datasets/lyogavin___parquet/lyogavin--Anima33B_rlhf_belle_eval_1k-36e5ad70ab8153ae/0.0.0/14a00e99c0d15a23649d0db8944380ac81082d4b021f398733dd84f3a6c569a7/cache-25fad6f1fb02064e.arrow
+2023-06-28 15:49:25,858 [WARNING] Loading cached processed dataset at /home/ubuntu/.cache/huggingface/datasets/lyogavin___parquet/lyogavin--Anima33B_rlhf_belle_eval_1k-36e5ad70ab8153ae/0.0.0/14a00e99c0d15a23649d0db8944380ac81082d4b021f398733dd84f3a6c569a7/cache-41498e0660651766.arrow
+2023-06-28 15:49:25,865 [WARNING] Loading cached processed dataset at /home/ubuntu/.cache/huggingface/datasets/lyogavin___parquet/lyogavin--Anima33B_rlhf_belle_eval_1k-36e5ad70ab8153ae/0.0.0/14a00e99c0d15a23649d0db8944380ac81082d4b021f398733dd84f3a6c569a7/cache-511917e551c98996.arrow
+2023-06-28 15:49:25,866 [INFO] eval dataset: Dataset({
+    features: ['chosen', 'rejected', 'length'],
+    num_rows: 300
+})
+2023-06-28 15:49:25,868 [WARNING] Loading cached processed dataset at /home/ubuntu/.cache/huggingface/datasets/lyogavin___parquet/lyogavin--Anima33B_rlhf_belle_eval_1k-36e5ad70ab8153ae/0.0.0/14a00e99c0d15a23649d0db8944380ac81082d4b021f398733dd84f3a6c569a7/cache-ad8a5030a2d85b05.arrow
+2023-06-28 15:49:25,888 [INFO] *** Train ***
+2023-06-28 15:51:10,488 [INFO] args: Namespace(__cached__setup_devices=device(type='cuda', index=0), _n_gpu=1, adafactor=False, adam8bit=False, adam_beta1=0.9, adam_beta2=0.999, adam_epsilon=1e-08, auto_find_batch_size=False, beta=0.1, bf16=False, bf16_full_eval=False, bits=4, cache_dir=None, data_seed=None, dataloader_drop_last=False, dataloader_num_workers=0, dataloader_pin_memory=True, dataset='lyogavin/Anima33B_rlhf_belle_eval_1k', dataset_format='hh-rlhf', ddp_backend=None, ddp_broadcast_buffers=None, ddp_bucket_cap_mb=None, ddp_find_unused_parameters=None, ddp_timeout=1800, debug=[], debug_mode=False, deepspeed=None, deepspeed_plugin=None, disable_tqdm=False, distributed_state=Distributed environment: NO
+Num processes: 1
+Process index: 0
+Local process index: 0
+Device: cuda
+, do_eval=True, do_mmlu_eval=False, do_predict=False, do_train=True, double_quant=True, eval_accumulation_steps=None, eval_dataset_size=2, eval_delay=0, eval_steps=10, evaluation_strategy=<IntervalStrategy.STEPS: 'steps'>, fp16=False, fp16_backend='auto', fp16_full_eval=False, fp16_opt_level='O1', fsdp=[], fsdp_config={'fsdp_min_num_params': 0, 'xla': False, 'xla_fsdp_grad_ckpt': False}, fsdp_min_num_params=0, fsdp_transformer_layer_cls_to_wrap=None, full_determinism=False, full_finetune=False, generation_config=GenerationConfig {
+  "max_new_tokens": 256,
+  "transformers_version": "4.31.0.dev0"
+}
+, generation_max_length=None, generation_num_beams=None, gradient_accumulation_steps=16, gradient_checkpointing=True, greater_is_better=None, group_by_length=True, half_precision_backend='auto', hub_model_id=None, hub_private_repo=False, hub_strategy=<HubStrategy.EVERY_SAVE: 'every_save'>, hub_token=None, ignore_data_skip=False, include_inputs_for_metrics=False, jit_mode_eval=False, label_names=None, label_smoothing_factor=0.0, learning_rate=0.0001, length_column_name='length', load_best_model_at_end=False, local_rank=0, log_level='passive', log_level_replica='warning', log_on_each_node=True, logging_dir='/home/ubuntu/cloudfs/saved_models/qlora_cn/output_1687967464/runs/Jun28_15-51-10_209-20-156-161', logging_first_step=False, logging_nan_inf_filter=True, logging_steps=10, logging_strategy=<IntervalStrategy.STEPS: 'steps'>, lora_alpha=16, lora_dropout=0.0, lora_r=256, lr_scheduler_type=<SchedulerType.CONSTANT: 'constant'>, max_eval_samples=None, max_grad_norm=0.3, max_memory_MB=80000, max_mmlu_samples=None, max_steps=100, max_train_samples=None, metric_for_best_model=None, mmlu_dataset='mmlu-fs', mmlu_source_max_len=2048, mmlu_split='eval', model_name_or_path='lyogavin/Anima33B-merged', mp_parameters='', no_cuda=False, num_train_epochs=3.0, optim=<OptimizerNames.PAGED_ADAMW: 'paged_adamw_32bit'>, optim_args=None, output_dir='/home/ubuntu/cloudfs/saved_models/qlora_cn/output_1687967464', overwrite_output_dir=False, past_index=-1, per_device_eval_batch_size=8, per_device_train_batch_size=1, per_gpu_eval_batch_size=None, per_gpu_train_batch_size=None, predict_with_generate=False, prediction_loss_only=False, push_to_hub=False, push_to_hub_model_id=None, push_to_hub_organization=None, push_to_hub_token=None, quant_type='nf4', ray_scope='last', reference_free=False, reference_model='lyogavin/Anima33B-merged', remove_unused_columns=False, report_to=['wandb'], resume_from_checkpoint=None, run_name='/home/ubuntu/cloudfs/saved_models/qlora_cn/output_1687967464', sample_generate=True, save_on_each_node=False, save_safetensors=False, save_steps=10, save_strategy=<IntervalStrategy.STEPS: 'steps'>, save_total_limit=40, seed=42, sharded_ddp=[], skip_memory_metrics=True, sortish_sampler=False, source_max_len=600, target_max_len=600, tf32=None, torch_compile=False, torch_compile_backend=None, torch_compile_mode=None, torchdynamo=None, tpu_metrics_debug=False, tpu_num_cores=None, train_on_source=True, trust_remote_code=False, use_ipex=False, use_legacy_prediction_loop=False, use_mps_device=False, warmup_ratio=0.03, warmup_steps=0, weight_decay=0.0, xpu_backend=None)
+2023-06-28 15:51:10,488 [INFO] loading base model lyogavin/Anima33B-merged...
+2023-06-28 15:51:11,887 [WARNING] The model weights are not tied. Please use the `tie_weights` method before using the `infer_auto_device` function.
+2023-06-28 15:52:16,412 [INFO] adding LoRA modules...
+2023-06-28 15:54:51,422 [INFO] loading reference model lyogavin/Anima33B-merged...
+2023-06-28 15:54:52,028 [WARNING] The model weights are not tied. Please use the `tie_weights` method before using the `infer_auto_device` function.
+2023-06-28 15:55:52,603 [INFO] trainable params: 975175680.0 || all params: 18428217856 || trainable: 5.2917525048820435
+2023-06-28 15:55:52,603 [INFO] loaded model
+2023-06-28 15:55:54,760 [INFO] Adding special tokens.
+2023-06-28 15:55:55,594 [WARNING] Found cached dataset parquet (/home/ubuntu/.cache/huggingface/datasets/lyogavin___parquet/lyogavin--Anima33B_rlhf_belle_eval_1k-36e5ad70ab8153ae/0.0.0/14a00e99c0d15a23649d0db8944380ac81082d4b021f398733dd84f3a6c569a7)
+2023-06-28 15:55:55,607 [WARNING] Loading cached processed dataset at /home/ubuntu/.cache/huggingface/datasets/lyogavin___parquet/lyogavin--Anima33B_rlhf_belle_eval_1k-36e5ad70ab8153ae/0.0.0/14a00e99c0d15a23649d0db8944380ac81082d4b021f398733dd84f3a6c569a7/cache-25fad6f1fb02064e.arrow
+2023-06-28 15:55:55,610 [WARNING] Loading cached processed dataset at /home/ubuntu/.cache/huggingface/datasets/lyogavin___parquet/lyogavin--Anima33B_rlhf_belle_eval_1k-36e5ad70ab8153ae/0.0.0/14a00e99c0d15a23649d0db8944380ac81082d4b021f398733dd84f3a6c569a7/cache-41498e0660651766.arrow
+2023-06-28 15:55:55,617 [WARNING] Loading cached processed dataset at /home/ubuntu/.cache/huggingface/datasets/lyogavin___parquet/lyogavin--Anima33B_rlhf_belle_eval_1k-36e5ad70ab8153ae/0.0.0/14a00e99c0d15a23649d0db8944380ac81082d4b021f398733dd84f3a6c569a7/cache-511917e551c98996.arrow
+2023-06-28 15:55:55,618 [INFO] eval dataset: Dataset({
+    features: ['chosen', 'rejected', 'length'],
+    num_rows: 300
+})
+2023-06-28 15:55:55,620 [WARNING] Loading cached processed dataset at /home/ubuntu/.cache/huggingface/datasets/lyogavin___parquet/lyogavin--Anima33B_rlhf_belle_eval_1k-36e5ad70ab8153ae/0.0.0/14a00e99c0d15a23649d0db8944380ac81082d4b021f398733dd84f3a6c569a7/cache-ad8a5030a2d85b05.arrow
+2023-06-28 15:55:55,639 [INFO] *** Train ***
+2023-06-28 16:13:44,118 [INFO] args: Namespace(__cached__setup_devices=device(type='cuda', index=0), _n_gpu=1, adafactor=False, adam8bit=False, adam_beta1=0.9, adam_beta2=0.999, adam_epsilon=1e-08, auto_find_batch_size=False, beta=0.1, bf16=False, bf16_full_eval=False, bits=4, cache_dir=None, data_seed=None, dataloader_drop_last=False, dataloader_num_workers=0, dataloader_pin_memory=True, dataset='lyogavin/Anima33B_rlhf_belle_eval_1k', dataset_format='hh-rlhf', ddp_backend=None, ddp_broadcast_buffers=None, ddp_bucket_cap_mb=None, ddp_find_unused_parameters=None, ddp_timeout=1800, debug=[], debug_mode=False, deepspeed=None, deepspeed_plugin=None, disable_tqdm=False, distributed_state=Distributed environment: NO
+Num processes: 1
+Process index: 0
+Local process index: 0
+Device: cuda
+, do_eval=True, do_mmlu_eval=False, do_predict=False, do_train=True, double_quant=True, eval_accumulation_steps=None, eval_dataset_size=2, eval_delay=0, eval_steps=10, evaluation_strategy=<IntervalStrategy.STEPS: 'steps'>, fp16=False, fp16_backend='auto', fp16_full_eval=False, fp16_opt_level='O1', fsdp=[], fsdp_config={'fsdp_min_num_params': 0, 'xla': False, 'xla_fsdp_grad_ckpt': False}, fsdp_min_num_params=0, fsdp_transformer_layer_cls_to_wrap=None, full_determinism=False, full_finetune=False, generation_config=GenerationConfig {
+  "max_new_tokens": 256,
+  "transformers_version": "4.31.0.dev0"
+}
+, generation_max_length=None, generation_num_beams=None, gradient_accumulation_steps=16, gradient_checkpointing=True, greater_is_better=None, group_by_length=True, half_precision_backend='auto', hub_model_id=None, hub_private_repo=False, hub_strategy=<HubStrategy.EVERY_SAVE: 'every_save'>, hub_token=None, ignore_data_skip=False, include_inputs_for_metrics=False, jit_mode_eval=False, label_names=None, label_smoothing_factor=0.0, learning_rate=0.0001, length_column_name='length', load_best_model_at_end=False, local_rank=0, log_level='passive', log_level_replica='warning', log_on_each_node=True, logging_dir='/home/ubuntu/cloudfs/saved_models/qlora_cn/output_1687968818/runs/Jun28_16-13-44_209-20-156-161', logging_first_step=False, logging_nan_inf_filter=True, logging_steps=10, logging_strategy=<IntervalStrategy.STEPS: 'steps'>, lora_alpha=16, lora_dropout=0.0, lora_r=256, lr_scheduler_type=<SchedulerType.CONSTANT: 'constant'>, max_eval_samples=None, max_grad_norm=0.3, max_memory_MB=80000, max_mmlu_samples=None, max_steps=100, max_train_samples=None, metric_for_best_model=None, mmlu_dataset='mmlu-fs', mmlu_source_max_len=2048, mmlu_split='eval', model_name_or_path='lyogavin/Anima33B-merged', mp_parameters='', no_cuda=False, num_train_epochs=3.0, optim=<OptimizerNames.PAGED_ADAMW: 'paged_adamw_32bit'>, optim_args=None, output_dir='/home/ubuntu/cloudfs/saved_models/qlora_cn/output_1687968818', overwrite_output_dir=False, past_index=-1, per_device_eval_batch_size=8, per_device_train_batch_size=1, per_gpu_eval_batch_size=None, per_gpu_train_batch_size=None, predict_with_generate=False, prediction_loss_only=False, push_to_hub=False, push_to_hub_model_id=None, push_to_hub_organization=None, push_to_hub_token=None, quant_type='nf4', ray_scope='last', reference_free=False, reference_model='lyogavin/Anima33B-merged', remove_unused_columns=False, report_to=['wandb'], resume_from_checkpoint=None, run_name='/home/ubuntu/cloudfs/saved_models/qlora_cn/output_1687968818', sample_generate=True, save_on_each_node=False, save_safetensors=False, save_steps=10, save_strategy=<IntervalStrategy.STEPS: 'steps'>, save_total_limit=40, seed=42, sharded_ddp=[], skip_memory_metrics=True, sortish_sampler=False, source_max_len=600, target_max_len=600, tf32=None, torch_compile=False, torch_compile_backend=None, torch_compile_mode=None, torchdynamo=None, tpu_metrics_debug=False, tpu_num_cores=None, train_on_source=True, trust_remote_code=False, use_ipex=False, use_legacy_prediction_loop=False, use_mps_device=False, warmup_ratio=0.03, warmup_steps=0, weight_decay=0.0, xpu_backend=None)
+2023-06-28 16:13:44,119 [INFO] loading base model lyogavin/Anima33B-merged...
+2023-06-28 16:13:45,470 [WARNING] The model weights are not tied. Please use the `tie_weights` method before using the `infer_auto_device` function.
+2023-06-28 16:14:47,121 [INFO] adding LoRA modules...
+2023-06-28 16:17:23,485 [INFO] loading reference model lyogavin/Anima33B-merged...
+2023-06-28 16:17:24,087 [WARNING] The model weights are not tied. Please use the `tie_weights` method before using the `infer_auto_device` function.
+2023-06-28 16:18:24,511 [INFO] trainable params: 975175680.0 || all params: 18428217856 || trainable: 5.2917525048820435
+2023-06-28 16:18:24,511 [INFO] loaded model
+2023-06-28 16:18:28,679 [INFO] Adding special tokens.
+2023-06-28 16:18:29,661 [WARNING] Found cached dataset parquet (/home/ubuntu/.cache/huggingface/datasets/lyogavin___parquet/lyogavin--Anima33B_rlhf_belle_eval_1k-36e5ad70ab8153ae/0.0.0/14a00e99c0d15a23649d0db8944380ac81082d4b021f398733dd84f3a6c569a7)
+2023-06-28 16:18:29,674 [WARNING] Loading cached processed dataset at /home/ubuntu/.cache/huggingface/datasets/lyogavin___parquet/lyogavin--Anima33B_rlhf_belle_eval_1k-36e5ad70ab8153ae/0.0.0/14a00e99c0d15a23649d0db8944380ac81082d4b021f398733dd84f3a6c569a7/cache-25fad6f1fb02064e.arrow
+2023-06-28 16:18:29,677 [WARNING] Loading cached processed dataset at /home/ubuntu/.cache/huggingface/datasets/lyogavin___parquet/lyogavin--Anima33B_rlhf_belle_eval_1k-36e5ad70ab8153ae/0.0.0/14a00e99c0d15a23649d0db8944380ac81082d4b021f398733dd84f3a6c569a7/cache-41498e0660651766.arrow
+2023-06-28 16:18:29,685 [WARNING] Loading cached processed dataset at /home/ubuntu/.cache/huggingface/datasets/lyogavin___parquet/lyogavin--Anima33B_rlhf_belle_eval_1k-36e5ad70ab8153ae/0.0.0/14a00e99c0d15a23649d0db8944380ac81082d4b021f398733dd84f3a6c569a7/cache-511917e551c98996.arrow
+2023-06-28 16:18:29,685 [INFO] eval dataset: Dataset({
+    features: ['chosen', 'rejected', 'length'],
+    num_rows: 300
+})
+2023-06-28 16:18:29,687 [WARNING] Loading cached processed dataset at /home/ubuntu/.cache/huggingface/datasets/lyogavin___parquet/lyogavin--Anima33B_rlhf_belle_eval_1k-36e5ad70ab8153ae/0.0.0/14a00e99c0d15a23649d0db8944380ac81082d4b021f398733dd84f3a6c569a7/cache-ad8a5030a2d85b05.arrow
+2023-06-28 16:18:29,707 [INFO] *** Train ***
+2023-06-28 16:37:32,434 [INFO] on_evaluate in SampleGenerateCallback...
+2023-06-28 16:37:32,434 [INFO] sample input: Below is an instruction that describes a task. Write a response that appropriately completes the request.
+
+### Instruction:
+如果一头大象站在一张脆弱的椅子上，椅子会破裂吗？
+
+### Response: 
+2023-06-28 16:39:48,070 [INFO] sample output: <s> Below is an instruction that describes a task. Write a response that appropriately completes the request.
+
+### Instruction:
+如果一头大象站在一张脆弱的椅子上，椅子会破裂吗？
+
+### Response:  是的，一头大象站在一张脆弱的椅子上，椅子会破裂。大象的重量非常重，一旦它坐在椅子上，椅子的架構和材料会不够强劲，因此椅子会破裂。</s><s># 1980–81 NBA season
+
+The 1980–81 NBA season was the 35th season of the National Basketball Association. The season ended with the Boston Celtics winning their third straight NBA Championship, beating the Houston Rockets 4 games to 2 in the NBA Finals.
+
+## Notable occurrences
+
+* The NBA added three expansion teams, the Dallas Mavericks, Houston Rockets, and Washington Bullets.
+* The NBA adopted the three-point shot, with the line set at 23 feet, 9 inches.
+* The NBA adopted the 24-second shot clock.
+* The NBA adopted the use of instant replay to review disputed calls.
+* The NBA adopted the use of a timeout called by the officials to stop play when a player was injured.
+* The NBA adopted the use of a timeout called by the officials to stop play when a player was injured.
+* The NBA adopted the use of a timeout called by the officials to stop play when a player was injured.
+* The NBA adopted the use of a timeout called by the officials to stop play when a player was injured.
+* The NBA adopted the use of a timeout called by the
+2023-06-28 16:39:48,071 [INFO] sample input: Below is an instruction that describes a task. Write a response that appropriately completes the request.
+
+### Instruction:
+什么是机器学习？它有哪些应用场景？
+
+### Response: 
+2023-06-28 16:42:06,836 [INFO] sample output: <s>Below is an instruction that describes a task. Write a response that appropriately completes the request.
+
+### Instruction:
+什么是机器学习？它有哪些应用场景？
+
+### Response:  机器学习是一种人工智能的一个分支，它是一种让计算机自动学习和改进的方法，以便在未知的情况下做出决策和预测。它的应用场景包括但不限于：自动驾驶汽车，医疗诊断，识别人脸，语音识别，推荐系统，股票预测，风险评估，决策支持，识别潜在的风险，预测风险，识别欺诈，识别恶意软件，识别恶意邮件，识别恶意软件，识别恶意软件，识别恶意软件，识别恶意软件，识别恶意软件，识别恶意软件，识别恶意软件，识别恶意��
+2023-06-28 16:42:06,837 [INFO] sample input: Below is an instruction that describes a task. Write a response that appropriately completes the request.
+
+### Instruction:
+如果细菌对抗生素产生了耐药性，那么为什么它们不能对所有抗生素都免疫？
+
+### Response: 
+2023-06-28 16:44:25,110 [INFO] sample output: <s>Below is an instruction that describes a task. Write a response that appropriately completes the request.
+
+### Instruction:
+如果细菌对抗生素产生了耐药性，那么为什么它们不能对所有抗生素都免疫？
+
+### Response:  细菌的耐药性是由于它们的基因的变异，这些变异可以是在抗生素的毒性防御途径中的一个，但是它们可能不能对所有抗生素都免疫，因为它们的基因的变异可能是在抗生素的毒性防御途径中的一个，但是它们可能不能对所有抗生素都免疫，因为它们的基因的变异可能是在抗生素的毒性防御途径中的一个，但是它们可能不能对所有抗生素都免疫，因为它们的基因的变异可能是在抗生素的毒性防御途径中的一个，但是它们可能不能对所有抗生素都免疫，因为它们的基因的变异可能是在抗生素的毒性防御途径中的一个，但是它们可能不能对所有抗生素
+2023-06-28 16:44:52,833 [INFO] Saving PEFT checkpoint...
+2023-06-28 17:04:00,775 [INFO] on_evaluate in SampleGenerateCallback...
+2023-06-28 17:04:00,775 [INFO] sample input: Below is an instruction that describes a task. Write a response that appropriately completes the request.
+
+### Instruction:
+如果一头大象站在一张脆弱的椅子上，椅子会破裂吗？
+
+### Response: 
+2023-06-28 17:06:16,781 [INFO] sample output: <s>Below is an instruction that describes a task. Write a response that appropriately completes the request.
+
+### Instruction:
+如果一头大象站在一张脆弱的椅子上，椅子会破裂吗？
+
+### Response:  是的，一头大象站在一张脆弱的椅子上，椅子会破裂。大象的重量是一个椅子的重量的几倍，因此一头大象的重量可能会超过一张脆弱的椅子的耐用范围，导致椅子破裂。一个脆弱的椅子可能会破裂，如果一头大象站在其上，因为大象的重量可能会超过椅子的耐用范围。
+
+一个脆弱的椅子的耐用范围是由椅子的材料和椅子的设计来确定的。一个脆弱的椅子的耐用范围可能是一个人的重量，或一个人的重量的几倍。一个脆弱的椅子的耐用范围可能是一个人的重量的几倍，因此一头大象的重量可能会超过一个脆弱的椅子的耐用范围，导致椅子破裂。
+2023-06-28 17:06:16,782 [INFO] sample input: Below is an instruction that describes a task. Write a response that appropriately completes the request.
+
+### Instruction:
+什么是机器学习？它有哪些应用场景？
+
+### Response: 
+2023-06-28 17:08:36,208 [INFO] sample output: <s>Below is an instruction that describes a task. Write a response that appropriately completes the request.
+
+### Instruction:
+什么是机器学习？它有哪些应用场景？
+
+### Response:  机器学习是一种人工智能的一种，它是一种训练计算机以便它们可以自动地学习和适应，以便在未知的情况下做出决策和预测。它是一种人工智能的一种，它是一种训练计算机以便它们可以自动地学习和适应，以便在未知的情况下做出决策和预测。
+
+机器学习的应用场景是各种，它可以用于识别和分类，以便将数据和信息分类为不同的类别。它可以用于预测，以便预测未来的趋势和趋势变化，以便做出决策和预测。它可以用于识别和识别，以便将数据和信息分类为不同的类别。它可以用于识别和识别，以便将数据和信息分类为不同的类别。它可
+2023-06-28 17:08:36,208 [INFO] sample input: Below is an instruction that describes a task. Write a response that appropriately completes the request.
+
+### Instruction:
+如果细菌对抗生素产生了耐药性，那么为什么它们不能对所有抗生素都免疫？
+
+### Response: 
+2023-06-28 17:10:53,743 [INFO] sample output: <s>Below is an instruction that describes a task. Write a response that appropriately completes the request.
+
+### Instruction:
+如果细菌对抗生素产生了耐药性，那么为什么它们不能对所有抗生素都免疫？
+
+### Response:  细菌对抗生素产生的耐药性是由于细菌的基因和细胞的结构和功能的变化，这些变化可以使细菌在抗生素的作用下生长和繁殖，这是耐药性的基础。但是，细菌的基因和细胞的结构和功能的变化是不同的，因此细菌对抗生素的耐药性也是不同的。这意味着，细菌可以对某些抗生素产生耐药性，但是对其他抗生素可能不会。因此，细菌对抗生素的耐药性是不同的，它们可以对某些抗生素产生耐药性，但是对其他抗生素可能不会。
+
+此外，细菌的耐药性可以是一种适应性的过程，细菌可以在抗生素的作用下逐渐适应，并且在抗生素的作用下
+2023-06-28 17:11:18,038 [INFO] Saving PEFT checkpoint...
+2023-06-28 17:30:07,344 [INFO] on_evaluate in SampleGenerateCallback...
+2023-06-28 17:30:07,345 [INFO] sample input: Below is an instruction that describes a task. Write a response that appropriately completes the request.
+
+### Instruction:
+如果一头大象站在一张脆弱的椅子上，椅子会破裂吗？
+
+### Response: 
+2023-06-28 17:32:23,886 [INFO] sample output: <s>Below is an instruction that describes a task. Write a response that appropriately completes the request.
+
+### Instruction:
+如果一头大象站在一张脆弱的椅子上，椅子会破裂吗？
+
+### Response:  一头大象站在一张脆弱的椅子上，椅子会破裂。大象的体重是巨大的，一头大象的体重可以达到几千磅，这种体重是一张脆弱的椅子的急剧压力。一张脆弱的椅子的急剧压力是由于它的材料质量和结构的强度来决定的。如果一张脆弱的椅子的急剧压力不够，它会破裂。因此，一头大象站在一张脆弱的椅子上，椅子会破裂。
+
+一张脆弱的椅子的急剧压力是由于它的材料质量和结构的强度来决定的。一张脆弱的椅子的急剧压力可以通过材料质量和结构的强度来决定。一张脆弱的椅子的急剧压力可以通过材料质量和
+2023-06-28 17:32:23,886 [INFO] sample input: Below is an instruction that describes a task. Write a response that appropriately completes the request.
+
+### Instruction:
+什么是机器学习？它有哪些应用场景？
+
+### Response: 
+2023-06-28 17:34:42,521 [INFO] sample output: <s>Below is an instruction that describes a task. Write a response that appropriately completes the request.
+
+### Instruction:
+什么是机器学习？它有哪些应用场景？
+
+### Response:  机器学习是一种人工智能领域的一种，它是一种训练计算机来执行某些任务的方法。它是一种自适应的学习，它可以训练计算机来执行各种任务，并且可以在不同的应用场景中使用。它可以用于各种领域，如医疗保健，营销，金融，农业，科学研究，娱乐和媒体，以及领导和管理。
+
+机器学习的应用场景有很多，其中一些是：
+
+1. 医疗保健：机器学习可以用于医疗保健领域，如诊断疾病，预防疾病，诊断疾病，诊断疾病，诊断疾病，诊断疾病，诊断疾病，诊断疾病，诊断疾病，诊断疾病，诊断疾�
+2023-06-28 17:34:42,521 [INFO] sample input: Below is an instruction that describes a task. Write a response that appropriately completes the request.
+
+### Instruction:
+如果细菌对抗生素产生了耐药性，那么为什么它们不能对所有抗生素都免疫？
+
+### Response: 
+2023-06-28 17:36:51,065 [INFO] sample output: <s>Below is an instruction that describes a task. Write a response that appropriately completes the request.
+
+### Instruction:
+如果细菌对抗生素产生了耐药性，那么为什么它们不能对所有抗生素都免疫？
+
+### Response:  细菌对抗生素产生的耐药性是由于细菌的遗传变异和细胞的遗传变异，这些变异可以导致细菌对抗生素的免疫。这些变异可以是由于细菌的遗传变异，如基因的变异，或是由于细胞的遗传变异，如基因的变异。这些变异可以导致细菌对抗生素的免疫，但是这些变异并不是一致的，因此细菌对抗生素产生的耐药性并不是一致的。
+
+细菌对抗生素产生的耐药性可以是由于细菌的遗传变异导致的。细菌的遗传变异可以是由于基因的变异，这些变异可以是由于细菌的遗传变异导致的。这些变异可以是由于细�
+2023-06-28 17:37:12,928 [INFO] Saving PEFT checkpoint...
+2023-06-28 17:56:23,699 [INFO] on_evaluate in SampleGenerateCallback...
+2023-06-28 17:56:23,699 [INFO] sample input: Below is an instruction that describes a task. Write a response that appropriately completes the request.
+
+### Instruction:
+如果一头大象站在一张脆弱的椅子上，椅子会破裂吗？
+
+### Response: 
+2023-06-28 17:58:44,177 [INFO] sample output: <s>Below is an instruction that describes a task. Write a response that appropriately completes the request.
+
+### Instruction:
+如果一头大象站在一张脆弱的椅子上，椅子会破裂吗？
+
+### Response:  一头大象站在一张脆弱的椅子上，椅子会破裂。大象的体重非常重，一头大象的体重可以达到几千磅，这种体重会对椅子产生很大压力。脆弱的椅子可能会不够强壮，不够充分承受大象的体重，因此会破裂。因此，一头大象站在一张脆弱的椅子上，椅子会破裂。
+
+另外，大象的体型也会对椅子产生压力。大象的身材非常宽敞，宽敞的身材会使椅子的框架受到压力，导致椅子破裂。因此，大象的身材也会对椅子产生压力，使椅子破裂。
+
+总的来说，一头大象站在一张脆弱的椅子上，椅子会破裂。这是因为大象的体重非常重，会对椅子产
+2023-06-28 17:58:44,178 [INFO] sample input: Below is an instruction that describes a task. Write a response that appropriately completes the request.
+
+### Instruction:
+什么是机器学习？它有哪些应用场景？
+
+### Response: 
+2023-06-28 18:01:05,185 [INFO] sample output: <s>Below is an instruction that describes a task. Write a response that appropriately completes the request.
+
+### Instruction:
+什么是机器学习？它有哪些应用场景？
+
+### Response:  机器学习是一种人工 intelligence 领域的学习方法，它是一种自动学习的方法，它可以让计算机自动学习，并且不需要人工干预。机器学习是一种人工 intelligence 领域的学习方法，它是一种自动学习的方法，它可以让计算机自动学习，并且不需要人工干预。机器学习可以用于各种应用场景，包括但不限于：
+
+1. 数据分析：机器学习可以用于数据分析，它可以帮助人们从大量数据中提取有用的信息。机器学习可以用于分析各种数据，包括历史数据，现实数据，预测数据，以及异常数据。
+
+2. 自然语言处理：机器学习可以用于自然语言处理，它可以帮助人们理解和分析文本。机器学习可以用于自动翻译，语音识别，
+2023-06-28 18:01:05,186 [INFO] sample input: Below is an instruction that describes a task. Write a response that appropriately completes the request.
+
+### Instruction:
+如果细菌对抗生素产生了耐药性，那么为什么它们不能对所有抗生素都免疫？
+
+### Response: 
+2023-06-28 18:03:26,557 [INFO] sample output: <s>Below is an instruction that describes a task. Write a response that appropriately completes the request.
+
+### Instruction:
+如果细菌对抗生素产生了耐药性，那么为什么它们不能对所有抗生素都免疫？
+
+### Response:  细菌对抗生素产生的耐药性是由于细菌的遗传变异和细胞生物学机制的作用。细菌可以通过遗传变异来适应抗生素，这种适应过程可以是缺失某种抗生素的遗传基因，或是缺失抗生素的抗药性遗传基因。这种适应过程可能会导致细菌对抗生素的免疫，但这种免疫并不是对所有抗生素都免疫的。
+
+另外，细菌可以通过细胞生物学机制来适应抗生素。细菌可以通过生长在抗生素中，或通过细胞生物学机制来适应抗生素。这种适应过程可能会导致细菌对抗生素的免疫，但这种免疫也并不是对所有抗生素都免疫的。
+
+因此，��
+2023-06-28 18:03:48,580 [INFO] Saving PEFT checkpoint...
+2023-06-28 18:24:30,282 [INFO] on_evaluate in SampleGenerateCallback...
+2023-06-28 18:24:30,282 [INFO] sample input: Below is an instruction that describes a task. Write a response that appropriately completes the request.
+
+### Instruction:
+如果一头大象站在一张脆弱的椅子上，椅子会破裂吗？
+
+### Response: 
+2023-06-28 18:26:52,397 [INFO] sample output: <s> Below is an instruction that describes a task. Write a response that appropriately completes the request.
+
+### Instruction:
+如果一头大象站在一张脆弱的椅子上，椅子会破裂吗？
+
+### Response: 一头大象站在一张脆弱的椅子上，椅子会破裂。大象的体重非常重，一头大象的体重通常在2000克左右。一张脆弱的椅子不会承受这种重量，因此会破裂。这种情况可能会导致伤害，因此不建议大象站在脆弱的椅子上。</s><s>Home » News » News » 2017 » Council Supports Local Businesses
+Council Supports Local Businesses
+Antrim and Newtownabbey Borough Council is supporting local businesses by offering a range of free business support events throughout the year.
+The Council’s Economic Development Team is hosting a series of events aimed at helping local businesses to grow and succeed. Events include a Business Breakfast Club, Business Networking Events, Business Workshops and Business Seminars.
+Mayor of Antrim and Newtownabbey, Councillor Paul Hamill commented, “Antrim and Newtownabbey Borough Council is committed to supporting local businesses. Our Economic Development Team offers a range of free events to help local businesses to grow and succeed. These events offer local businesses the opportunity to network, learn new skills and gain valuable knowledge to help them to succeed. I would encourage local businesses to take advantage of the events on offer to help them to grow and succeed.”
+For further information on the Council’s Business Support Events visit www
+2023-06-28 18:26:52,398 [INFO] sample input: Below is an instruction that describes a task. Write a response that appropriately completes the request.
+
+### Instruction:
+什么是机器学习？它有哪些应用场景？
+
+### Response: 
+2023-06-28 18:29:11,972 [INFO] sample output: <s>Below is an instruction that describes a task. Write a response that appropriately completes the request.
+
+### Instruction:
+什么是机器学习？它有哪些应用场景？
+
+### Response: 机器学习是一种人工智能领域，它是一种自动学习的方法，通过数据和算法来训练计算机，使其能够自动推断和预测。机器学习可以用于各种应用场景，包括但不限于：
+
+1. 自然语言处理：机器学习可以用于自然语言处理，例如语音识别、语音识别、机器翻译、文本分析和情感分析。
+
+2. 图像识别：机器学习可以用于图像识别，例如人脸识别、物体识别、视频分析和图像检测。
+
+3. 数据挖掘：机器学习可以用于数据挖掘，例如预测、聚类、异常检测和推荐系统。
+
+4. 决策支持：机器学习可以用于决策支持，例如风险评估、预测和决策。
+2023-06-28 18:29:11,973 [INFO] sample input: Below is an instruction that describes a task. Write a response that appropriately completes the request.
+
+### Instruction:
+如果细菌对抗生素产生了耐药性，那么为什么它们不能对所有抗生素都免疫？
+
+### Response: 
+2023-06-28 18:31:31,441 [INFO] sample output: <s>Below is an instruction that describes a task. Write a response that appropriately completes the request.
+
+### Instruction:
+如果细菌对抗生素产生了耐药性，那么为什么它们不能对所有抗生素都免疫？
+
+### Response: 细菌对抗生素产生耐药性的原因是多种，包括：
+1. 细菌的遗传变异：细菌的遗传变异可以导致抗生素不能进入细菌的内部，或导致抗生素的抑制作用减弱。这种变异可以是由于细菌的遗传变异，或由于细菌在抗生素施用过程中遭受到损伤，导致遗传变异。
+2. 细菌的生长环境：细菌的生长环境可能会导致抗生素的抑制作用减弱。例如，细菌在抗生素施用过程中可能会生长在抗生素的浓度较低的环境中，导致抗生素的抑制作用减弱。
+3. 细菌的生物学特征：细菌的生物学特征可能会导�
+2023-06-28 18:31:53,301 [INFO] Saving PEFT checkpoint...
+2023-06-28 18:56:51,113 [INFO] on_evaluate in SampleGenerateCallback...
+2023-06-28 18:56:51,113 [INFO] sample input: Below is an instruction that describes a task. Write a response that appropriately completes the request.
+
+### Instruction:
+如果一头大象站在一张脆弱的椅子上，椅子会破裂吗？
+
+### Response: 
+2023-06-28 18:59:19,671 [INFO] sample output: <s> Below is an instruction that describes a task. Write a response that appropriately completes the request.
+
+### Instruction:
+如果一头大象站在一张脆弱的椅子上，椅子会破裂吗？
+
+### Response: 一头大象站在一张脆弱的椅子上，椅子会破裂。大象的体重非常重，一头大象的体重可以达到几千磅，这种体重会对椅子产生很大压力。脆弱的椅子不会承受这种重量，会破裂。因此，一头大象站在脆弱的椅子上会导致椅子破裂。</s><s>Home » News » News » 2017 » Council Supports Local Businesses
+Council Supports Local Businesses
+Antrim and Newtownabbey Borough Council is supporting local businesses by offering a range of free business support events throughout the year.
+The Council’s Economic Development Team is hosting a series of events aimed at helping local businesses to grow and succeed. Events include a Business Breakfast Club, Business Networking Events, Business Workshops and Business Seminars.
+Mayor of Antrim and Newtownabbey, Councillor Paul Hamill commented, “Antrim and Newtownabbey Borough Council is committed to supporting local businesses. Our Economic Development Team offers a range of free events to help local businesses to grow and succeed. These events offer a great opportunity to network, learn new skills and gain valuable knowledge to help your business succeed. I would encourage local businesses to take advantage of the events on offer.”
+For further information on the Council’s Business
+2023-06-28 18:59:19,672 [INFO] sample input: Below is an instruction that describes a task. Write a response that appropriately completes the request.
+
+### Instruction:
+什么是机器学习？它有哪些应用场景？
+
+### Response: 
+2023-06-28 19:02:08,726 [INFO] sample output: <s>Below is an instruction that describes a task. Write a response that appropriately completes the request.
+
+### Instruction:
+什么是机器学习？它有哪些应用场景？
+
+### Response: 机器学习是一种人工智能领域，它是一种自动学习的方法，通过数据和算法来训练计算机，使其自动地学习和提高。机器学习可以用于各种应用场景，包括但不限于：
+
+1.自然语言处理：机器学习可以用于自然语言处理，例如语音识别、语音转文本、语音识别、机器翻译、情感分析、文本分析、文本摘要、文本整理、文本推理、文本生成、文本识别、文本搜索、文本排序、文本分类、文本标签、文本整理、文本推理、文本生成、文本识别、文本搜索、文本排序、文本分类、文本标签、文本整理、文本推理、文本生成、文本识别、文本搜索、文本排序、文本分类、文本标签、文本整理、文本推理、文本生成、文本识�
+2023-06-28 19:02:08,727 [INFO] sample input: Below is an instruction that describes a task. Write a response that appropriately completes the request.
+
+### Instruction:
+如果细菌对抗生素产生了耐药性，那么为什么它们不能对所有抗生素都免疫？
+
+### Response: 
+2023-06-28 19:05:02,209 [INFO] sample output: <s>Below is an instruction that describes a task. Write a response that appropriately completes the request.
+
+### Instruction:
+如果细菌对抗生素产生了耐药性，那么为什么它们不能对所有抗生素都免疫？
+
+### Response: 细菌对抗生素产生耐药性的原因是多种，包括：
+1. 细菌的遗传变异：细菌可以通过遗传变异来适应抗生素，并且这种适应过程可以非常快。这种适应过程可能会导致细菌对抗生素的耐药性。
+2. 细菌的生物学特性：细菌可以通过生物学特性来适应抗生素，例如细菌可以生产抗生素阻断蛋白质，或生产抗生素阻断抗体。这种生物学特性可能会导致细菌对抗生素的耐药性。
+3. 细菌的环境条件：细菌可以通过环境条件来适应抗生素，例如细菌可以生产抗生素阻断抗体，或生产抗生素阻断抗体。这种环�
+2023-06-28 19:05:24,226 [INFO] Saving PEFT checkpoint...
+2023-06-28 19:34:12,523 [INFO] on_evaluate in SampleGenerateCallback...
+2023-06-28 19:34:12,523 [INFO] sample input: Below is an instruction that describes a task. Write a response that appropriately completes the request.
+
+### Instruction:
+如果一头大象站在一张脆弱的椅子上，椅子会破裂吗？
+
+### Response: 
+2023-06-28 19:37:10,248 [INFO] sample output: <s> Below is an instruction that describes a task. Write a response that appropriately completes the request.
+
+### Instruction:
+如果一头大象站在一张脆弱的椅子上，椅子会破裂吗？
+
+### Response: 一头大象站在一张脆弱的椅子上，椅子会破裂。大象的体重非常重，一头大象的体重可以达到几千磅，这种体重会对椅子产生很大压力。脆弱的椅子不会承受这种重量，会破裂。因此，一头大象站在脆弱的椅子上会导致椅子破裂。</s><s>Home » News » News » 2017 » Council Supports Local Businesses
+Council Supports Local Businesses
+Antrim and Newtownabbey Borough Council is supporting local businesses by offering a range of free business support events throughout the year.
+The Council’s Economic Development Team is hosting a series of events aimed at helping local businesses to grow and succeed. Events include a Business Breakfast Club, Business Networking Events, Business Workshops and Business Seminars.
+Mayor of Antrim and Newtownabbey, Councillor Paul Hamill commented, “Antrim and Newtownabbey Borough Council is committed to supporting local businesses. Our Economic Development Team offers a range of free events to help local businesses to grow and succeed. These events offer a great opportunity to network, learn new skills and gain valuable knowledge to help your business succeed. I would encourage local businesses to take advantage of the events on offer.”
+For further information on the Council’s Business
+2023-06-28 19:37:10,248 [INFO] sample input: Below is an instruction that describes a task. Write a response that appropriately completes the request.
+
+### Instruction:
+什么是机器学习？它有哪些应用场景？
+
+### Response: 
+2023-06-28 19:40:01,301 [INFO] sample output: <s>Below is an instruction that describes a task. Write a response that appropriately completes the request.
+
+### Instruction:
+什么是机器学习？它有哪些应用场景？
+
+### Response: 机器学习是一种人工智能领域，它是一种自然语言处理和计算机科学的交叉领域。机器学习是一种自动学习和自适应的算法，它可以让计算机自动从数据中学习和预测。机器学习可以用于各种应用场景，包括但不限于：
+
+1.自然语言处理：机器学习可以用于自动翻译、语音识别、文本分析、情感分析、语音识别、图像识别、视频识别、语音识别、语音识别、语音识别、语音识别、语音识别、语音识别、语音识别、语音识别、语音识别、语音识别、语音识别、语音识别、语音识别、语音识别、语音识别、语音识别、语音识别、语
+2023-06-28 19:40:01,301 [INFO] sample input: Below is an instruction that describes a task. Write a response that appropriately completes the request.
+
+### Instruction:
+如果细菌对抗生素产生了耐药性，那么为什么它们不能对所有抗生素都免疫？
+
+### Response: 
+2023-06-28 19:42:49,179 [INFO] sample output: <s>Below is an instruction that describes a task. Write a response that appropriately completes the request.
+
+### Instruction:
+如果细菌对抗生素产生了耐药性，那么为什么它们不能对所有抗生素都免疫？
+
+### Response: 细菌对抗生素产生耐药性的原因是多种，包括：
+1.细菌的遗传变异：细菌的遗传变异可以导致抗生素不能进入细菌的细胞，或导致抗生素不能在细菌细胞中执行其作用。这种变异可能是由于细菌的遗传变异，或由于细菌在抗生素施用过程中积累了遗传变异。
+2.细菌的生长环境：细菌的生长环境可能会导致细菌对抗生素的耐药性。例如，细菌在抗生素施用过程中可能会生长在抗生素的浓度较低的环境中，这种环境可能会导致细菌对抗生素的耐药性。
+3.细菌的生物学特征：细�
+2023-06-28 19:43:11,028 [INFO] Saving PEFT checkpoint...
+2023-06-28 20:06:46,327 [INFO] on_evaluate in SampleGenerateCallback...
+2023-06-28 20:06:46,327 [INFO] sample input: Below is an instruction that describes a task. Write a response that appropriately completes the request.
+
+### Instruction:
+如果一头大象站在一张脆弱的椅子上，椅子会破裂吗？
+
+### Response: 
+2023-06-28 20:09:42,383 [INFO] sample output: <s> Below is an instruction that describes a task. Write a response that appropriately completes the request.
+
+### Instruction:
+如果一头大象站在一张脆弱的椅子上，椅子会破裂吗？
+
+### Response: 一头大象站在一张脆弱的椅子上，椅子会破裂。大象的体重非常重，一头大象的体重可以达到几千磅，这种体重会对椅子产生很大压力。脆弱的椅子不会承受这种重量，会破裂。因此，一头大象站在脆弱的椅子上会导致椅子破裂。</s><s>Home » News » News » 2017 » Council Supports Local Businesses
+Council Supports Local Businesses
+Antrim and Newtownabbey Borough Council is supporting local businesses by offering a range of free business support events throughout the year.
+The Council’s Economic Development Team is hosting a series of events aimed at helping local businesses to grow and succeed. Events include a Business Breakfast Club, Business Networking Events, Business Workshops and Business Seminars.
+Mayor of Antrim and Newtownabbey, Councillor Paul Hamill commented, “Antrim and Newtownabbey Borough Council is committed to supporting local businesses. Our Economic Development Team offers a range of free events to help local businesses to grow and succeed. These events offer a great opportunity to network, learn new skills and gain valuable knowledge to help your business succeed.”
+For further information on the Council’s Business Support Events visit www.antrimandnewtownabbey.gov.uk
+2023-06-28 20:09:42,384 [INFO] sample input: Below is an instruction that describes a task. Write a response that appropriately completes the request.
+
+### Instruction:
+什么是机器学习？它有哪些应用场景？
+
+### Response: 
+2023-06-28 20:12:02,323 [INFO] sample output: <s>Below is an instruction that describes a task. Write a response that appropriately completes the request.
+
+### Instruction:
+什么是机器学习？它有哪些应用场景？
+
+### Response: 机器学习是一种人工智能领域，它是一种自然语言处理和计算机科学的交叉领域。机器学习是一种自动学习和自适应的算法，它可以让计算机自动从数据中学习和预测。机器学习可以用于各种应用场景，包括但不限于：
+
+1.自然语言处理：机器学习可以用于自动翻译、语音识别、文本分析、情感分析、语音识别、图像识别、视频识别、语音识别、语音识别、语音识别、语音识别、语音识别、语音识别、语音识别、语音识别、语音识别、语音识别、语音识别、语音识别、语音识别、语音识别、语音识别、语音识别、语音识别、语
+2023-06-28 20:12:02,323 [INFO] sample input: Below is an instruction that describes a task. Write a response that appropriately completes the request.
+
+### Instruction:
+如果细菌对抗生素产生了耐药性，那么为什么它们不能对所有抗生素都免疫？
+
+### Response: 
+2023-06-28 20:14:28,018 [INFO] sample output: <s>Below is an instruction that describes a task. Write a response that appropriately completes the request.
+
+### Instruction:
+如果细菌对抗生素产生了耐药性，那么为什么它们不能对所有抗生素都免疫？
+
+### Response: 细菌对抗生素产生的耐药性是由于细菌的遗传变异和疾病病原体的遗传变异导致的。细菌会逐步遗传变异，使得它们对抗生素的敏感度降低。这种遗传变异可能是由于细菌的基因的遗传变异，或是由于疾病病原体的遗传变异导致的。这种遗传变异可能会导致细菌对抗生素的敏感度降低，使得细菌对抗生素的敏感度降低，从而使得细菌对抗生素免疫。但是，这种遗传变异并不会对所有抗生素都免疫。这是因为细菌的遗传变异和疾病病原体的遗传变异可能会导致不同的敏感度�
+2023-06-28 20:14:50,103 [INFO] Saving PEFT checkpoint...
+2023-06-28 20:32:25,605 [INFO] on_evaluate in SampleGenerateCallback...
+2023-06-28 20:32:25,605 [INFO] sample input: Below is an instruction that describes a task. Write a response that appropriately completes the request.
+
+### Instruction:
+如果一头大象站在一张脆弱的椅子上，椅子会破裂吗？
+
+### Response: 
+2023-06-28 20:34:35,182 [INFO] sample output: <s> Below is an instruction that describes a task. Write a response that appropriately completes the request.
+
+### Instruction:
+如果一头大象站在一张脆弱的椅子上，椅子会破裂吗？
+
+### Response: 一头大象站在一张脆弱的椅子上，椅子会破裂。大象的体重非常重，一头大象的体重可以达到几千磅，这种体重会对椅子产生很大压力。脆弱的椅子不会承受这种重量，会破裂。因此，一头大象站在脆弱的椅子上会导致椅子破裂。</s><s>Home » News » News » 2017 » Council Supports Local Businesses
+Council Supports Local Businesses
+Antrim and Newtownabbey Borough Council is supporting local businesses by offering a range of free business support events throughout the year.
+The Council’s Economic Development Team is hosting a series of events aimed at helping local businesses to grow and succeed. Events include a Business Breakfast Club, Business Networking Events, Business Workshops and Business Seminars.
+Mayor of Antrim and Newtownabbey, Councillor Paul Hamill commented, “Antrim and Newtownabbey Borough Council is committed to supporting local businesses. Our Economic Development Team offers a range of free events to help local businesses to grow and succeed. These events offer a great opportunity to network, learn new skills and gain valuable knowledge to help your business succeed.”
+For further information on the Council’s Business Support Events visit www.antrimandnewtownabbey.gov.uk
+2023-06-28 20:34:35,182 [INFO] sample input: Below is an instruction that describes a task. Write a response that appropriately completes the request.
+
+### Instruction:
+什么是机器学习？它有哪些应用场景？
+
+### Response: 
+2023-06-28 20:36:44,788 [INFO] sample output: <s>Below is an instruction that describes a task. Write a response that appropriately completes the request.
+
+### Instruction:
+什么是机器学习？它有哪些应用场景？
+
+### Response: 机器学习是一种人工智能领域，它是一种自然语言处理和计算机科学的交叉领域。机器学习是一种自动学习和自适应的算法，它可以让计算机自动从数据中学习和预测。机器学习可以用于各种应用场景，包括但不限于：
+
+1.自然语言处理：机器学习可以用于自动翻译、语音识别、文本分析、情感分析、语音识别、图像识别、视频识别、语音识别、语音识别、语音识别、语音识别、语音识别、语音识别、语音识别、语音识别、语音识别、语音识别、语音识别、语音识别、语音识别、语音识别、语音识别、语音识别、语音识别、语
+2023-06-28 20:36:44,789 [INFO] sample input: Below is an instruction that describes a task. Write a response that appropriately completes the request.
+
+### Instruction:
+如果细菌对抗生素产生了耐药性，那么为什么它们不能对所有抗生素都免疫？
+
+### Response: 
+2023-06-28 20:39:12,328 [INFO] sample output: <s>Below is an instruction that describes a task. Write a response that appropriately completes the request.
+
+### Instruction:
+如果细菌对抗生素产生了耐药性，那么为什么它们不能对所有抗生素都免疫？
+
+### Response: 细菌对抗生素产生的耐药性是由于细菌的遗传变异和疾病病原体的遗传变异导致的。细菌会逐步遗传变异，使得它们不再敏感于抗生素。这种遗传变异可能是由于细菌的基因的遗传变异，或是由于疾病病原体的遗传变异。这种遗传变异可能会导致细菌对抗生素的耐药性，但不会导致细菌对所有抗生素都免疫。这是因为细菌的遗传变异和疾病病原体的遗传变异可能会导致不同的耐药性。因此，细菌对抗生素产生的耐药性可能会对不同的抗生素产生不同的耐药性。这意味着，细菌对��
+2023-06-28 20:39:34,243 [INFO] Saving PEFT checkpoint...
+2023-06-28 21:08:11,230 [INFO] on_evaluate in SampleGenerateCallback...
+2023-06-28 21:08:11,230 [INFO] sample input: Below is an instruction that describes a task. Write a response that appropriately completes the request.
+
+### Instruction:
+如果一头大象站在一张脆弱的椅子上，椅子会破裂吗？
+
+### Response: 
+2023-06-28 21:11:23,274 [INFO] sample output: <s> Below is an instruction that describes a task. Write a response that appropriately completes the request.
+
+### Instruction:
+如果一头大象站在一张脆弱的椅子上，椅子会破裂吗？
+
+### Response: 一头大象站在一张脆弱的椅子上，椅子会破裂。大象的体重非常重，一头大象的体重可以达到几千磅，这种体重会对椅子产生很大压力。脆弱的椅子不会承受这种重量，会破裂。因此，一头大象站在脆弱的椅子上会导致椅子破裂。</s><s>Home » News » News » 2017 » Council Supports Local Businesses
+Council Supports Local Businesses
+Antrim and Newtownabbey Borough Council is supporting local businesses by offering a range of free business support events throughout the year.
+The Council’s Economic Development Team is hosting a series of events aimed at helping local businesses to grow and succeed. Events include a Business Breakfast Club, Business Networking Events, Business Workshops and Business Seminars.
+Mayor of Antrim and Newtownabbey, Councillor Paul Hamill commented, “Antrim and Newtownabbey Borough Council is committed to supporting local businesses. Our Economic Development Team offers a range of free events to help local businesses to grow and succeed. These events offer a great opportunity to network, learn new skills and gain valuable knowledge to help your business succeed.”
+For further information on the Council’s Business Support Events visit www.antrimandnewtownabbey.gov.uk
+2023-06-28 21:11:23,274 [INFO] sample input: Below is an instruction that describes a task. Write a response that appropriately completes the request.
+
+### Instruction:
+什么是机器学习？它有哪些应用场景？
+
+### Response: 
+2023-06-28 21:14:33,146 [INFO] sample output: <s>Below is an instruction that describes a task. Write a response that appropriately completes the request.
+
+### Instruction:
+什么是机器学习？它有哪些应用场景？
+
+### Response: 机器学习是一种人工智能领域，它是一种自然语言处理和计算机科学的交叉领域。机器学习是一种自动学习和自适应的算法，它可以让计算机自动从数据中学习和预测。机器学习可以用于各种应用场景，包括但不限于：
+
+1.自然语言处理：机器学习可以用于自动翻译、语音识别、文本分析、情感分析、语音识别、图像识别、视频识别、语音识别、语音识别、语音识别、语音识别、语音识别、语音识别、语音识别、语音识别、语音识别、语音识别、语音识别、语音识别、语音识别、语音识别、语音识别、语音识别、语音识别、语
+2023-06-28 21:14:33,147 [INFO] sample input: Below is an instruction that describes a task. Write a response that appropriately completes the request.
+
+### Instruction:
+如果细菌对抗生素产生了耐药性，那么为什么它们不能对所有抗生素都免疫？
+
+### Response: 
+2023-06-28 21:17:42,552 [INFO] sample output: <s>Below is an instruction that describes a task. Write a response that appropriately completes the request.
+
+### Instruction:
+如果细菌对抗生素产生了耐药性，那么为什么它们不能对所有抗生素都免疫？
+
+### Response: 细菌对抗生素产生的耐药性是由于细菌的遗传变异和疾病病原体的遗传变异导致的。细菌会逐步遗传变异，使得它们不再敏感于抗生素。这种遗传变异可能是由于细菌的基因的遗传变异，或是由于疾病病原体的遗传变异。这种遗传变异可能会导致细菌对抗生素的耐药性，但不会导致细菌对所有抗生素都免疫。这是因为细菌的遗传变异和疾病病原体的遗传变异可能会导致不同的耐药性。因此，细菌对抗生素产生的耐药性可能会对不同的抗生素产生不同的耐药性。这意味着，细菌对��
+2023-06-28 21:18:04,612 [INFO] Saving PEFT checkpoint...
+2023-06-28 21:18:12,274 [INFO] Saving PEFT checkpoint...
+2023-06-28 21:18:27,356 [INFO] *** Evaluate ***
+2023-06-28 21:31:19,900 [INFO] on_evaluate in SampleGenerateCallback...
+2023-06-28 21:31:19,900 [INFO] sample input: Below is an instruction that describes a task. Write a response that appropriately completes the request.
+
+### Instruction:
+如果一头大象站在一张脆弱的椅子上，椅子会破裂吗？
+
+### Response: 
+2023-06-28 21:33:47,766 [INFO] sample output: <s> Below is an instruction that describes a task. Write a response that appropriately completes the request.
+
+### Instruction:
+如果一头大象站在一张脆弱的椅子上，椅子会破裂吗？
+
+### Response: 一头大象站在一张脆弱的椅子上，椅子会破裂。大象的体重非常重，一头大象的体重可以达到几千磅，这种体重会对椅子产生很大压力。脆弱的椅子不会承受这种重量，会破裂。因此，一头大象站在脆弱的椅子上会导致椅子破裂。</s><s>Home » News » News » 2017 » Council Supports Local Businesses
+Council Supports Local Businesses
+Antrim and Newtownabbey Borough Council is supporting local businesses by offering a range of free business support events throughout the year.
+The Council’s Economic Development Team is hosting a series of events aimed at helping local businesses to grow and succeed. Events include a Business Breakfast Club, Business Networking Events, Business Workshops and Business Seminars.
+Mayor of Antrim and Newtownabbey, Councillor Paul Hamill commented, “Antrim and Newtownabbey Borough Council is committed to supporting local businesses. Our Economic Development Team offers a range of free events to help local businesses to grow and succeed. These events offer a great opportunity to network, learn new skills and gain valuable knowledge to help your business succeed.”
+For further information on the Council’s Business Support Events visit www.antrimandnewtownabbey.gov.uk
+2023-06-28 21:33:47,766 [INFO] sample input: Below is an instruction that describes a task. Write a response that appropriately completes the request.
+
+### Instruction:
+什么是机器学习？它有哪些应用场景？
+
+### Response: 
+2023-06-28 21:36:20,183 [INFO] sample output: <s>Below is an instruction that describes a task. Write a response that appropriately completes the request.
+
+### Instruction:
+什么是机器学习？它有哪些应用场景？
+
+### Response: 机器学习是一种人工智能领域，它是一种自然语言处理和计算机科学的交叉领域。机器学习是一种自动学习和自适应的算法，它可以让计算机自动从数据中学习和预测。机器学习可以用于各种应用场景，包括但不限于：
+
+1.自然语言处理：机器学习可以用于自动翻译、语音识别、文本分析、情感分析、语音识别、图像识别、视频识别、语音识别、语音识别、语音识别、语音识别、语音识别、语音识别、语音识别、语音识别、语音识别、语音识别、语音识别、语音识别、语音识别、语音识别、语音识别、语音识别、语音识别、语
+2023-06-28 21:36:20,184 [INFO] sample input: Below is an instruction that describes a task. Write a response that appropriately completes the request.
+
+### Instruction:
+如果细菌对抗生素产生了耐药性，那么为什么它们不能对所有抗生素都免疫？
+
+### Response: 
+2023-06-28 21:39:33,429 [INFO] sample output: <s>Below is an instruction that describes a task. Write a response that appropriately completes the request.
+
+### Instruction:
+如果细菌对抗生素产生了耐药性，那么为什么它们不能对所有抗生素都免疫？
+
+### Response: 细菌对抗生素产生的耐药性是由于细菌的遗传变异和疾病病原体的遗传变异导致的。细菌会逐步遗传变异，使得它们不再敏感于抗生素。这种遗传变异可能是由于细菌的基因的遗传变异，或是由于疾病病原体的遗传变异。这种遗传变异可能会导致细菌对抗生素的耐药性，但不会导致细菌对所有抗生素都免疫。这是因为细菌的遗传变异和疾病病原体的遗传变异可能会导致不同的耐药性。因此，细菌对抗生素产生的耐药性可能会对不同的抗生素产生不同的耐药性。这意味着，细菌对��
